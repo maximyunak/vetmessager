@@ -1,0 +1,8 @@
+2026-09-13T17:54:44.378141	DEBUG	qzlt/main.go:32	Initializing postgtes connection pool
+2026-09-13T17:54:44.395119	DEBUG	qzlt/main.go:39	initializing feature	{"feature": "users"}
+2026-09-13T17:54:44.395420	WARN	server/server.go:50	starting http server on 	{"addr": ":5050"}
+2026-09-13T17:54:50.883861	DEBUG	middleware/common.go:79	>>> incoming http request	{"request_id": "0977e803-fe06-45f1-b4c5-3c7642a213f3", "url": "/api/v1/users", "method": "POST", "time": "2026-09-13T14:54:50.883857"}
+2026-09-13T17:54:50.884028	DEBUG	http/create_user.go:33	invoke create user handler	{"request_id": "0977e803-fe06-45f1-b4c5-3c7642a213f3", "url": "/api/v1/users", "method": "POST"}
+2026-09-13T17:54:50.885329	ERROR	response/handler.go:64	during handle HTTP request got unexpected panic	{"request_id": "0977e803-fe06-45f1-b4c5-3c7642a213f3", "url": "/api/v1/users", "method": "POST", "error": "unexpected panic: runtime error: invalid memory address or nil pointer dereference"}
+2026-09-13T17:55:28.263794	WARN	server/server.go:65	shutting down http server
+2026-09-13T17:55:28.264561	WARN	server/server.go:76	http server shutdown completed

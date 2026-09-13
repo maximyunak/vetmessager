@@ -1,0 +1,11 @@
+2026-09-13T17:36:31.516692	DEBUG	qzlt/main.go:32	Initializing postgtes connection pool
+2026-09-13T17:36:31.534293	DEBUG	qzlt/main.go:39	initializing feature	{"feature": "users"}
+2026-09-13T17:36:31.534702	WARN	server/server.go:50	starting http server on 	{"addr": ":5050"}
+2026-09-13T17:36:35.849274	DEBUG	middleware/common.go:79	>>> incoming http request	{"request_id": "17a56762-cd60-4a81-a515-af8378b6b7cb", "url": "/api/v1/users", "method": "POST", "time": "2026-09-13T14:36:35.849270"}
+2026-09-13T17:36:35.849450	DEBUG	http/create_user.go:33	invoke create user handler	{"request_id": "17a56762-cd60-4a81-a515-af8378b6b7cb", "url": "/api/v1/users", "method": "POST"}
+2026-09-13T17:36:35.941963	DEBUG	middleware/common.go:86	<<< done HTTP request	{"request_id": "17a56762-cd60-4a81-a515-af8378b6b7cb", "url": "/api/v1/users", "method": "POST", "status_code": 201, "latency": "92.692125ms"}
+2026-09-13T17:36:46.241084	DEBUG	middleware/common.go:79	>>> incoming http request	{"request_id": "f9a2e43b-a561-467e-a85c-175912d5be47", "url": "/api/v1/users", "method": "POST", "time": "2026-09-13T14:36:46.241081"}
+2026-09-13T17:36:46.241226	DEBUG	http/create_user.go:33	invoke create user handler	{"request_id": "f9a2e43b-a561-467e-a85c-175912d5be47", "url": "/api/v1/users", "method": "POST"}
+2026-09-13T17:36:46.326039	DEBUG	middleware/common.go:86	<<< done HTTP request	{"request_id": "f9a2e43b-a561-467e-a85c-175912d5be47", "url": "/api/v1/users", "method": "POST", "status_code": 201, "latency": "84.956167ms"}
+2026-09-13T17:54:42.348329	WARN	server/server.go:65	shutting down http server
+2026-09-13T17:54:42.349991	WARN	server/server.go:76	http server shutdown completed

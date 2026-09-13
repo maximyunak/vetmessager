@@ -1,0 +1,23 @@
+2026-09-12T21:24:20.308745	DEBUG	qzlt/main.go:27	starting application
+2026-09-12T21:24:20.309722	WARN	server/server.go:50	starting http server on 	{"addr": ":5050"}
+2026-09-12T21:24:23.305533	DEBUG	middleware/common.go:79	>>> incoming http request	{"request_id": "51f0b54d-6b56-4b7f-a291-83cc1f6da535", "url": "/api/v1/users", "method": "POST", "time": "2026-09-12T18:24:23.305529"}
+2026-09-12T21:24:23.305730	DEBUG	http/create_user.go:33	invoke create user handler	{"request_id": "51f0b54d-6b56-4b7f-a291-83cc1f6da535", "url": "/api/v1/users", "method": "POST"}
+2026-09-12T21:24:23.305940	ERROR	response/handler.go:55	Failed to decode and validate CreateUser request	{"request_id": "51f0b54d-6b56-4b7f-a291-83cc1f6da535", "url": "/api/v1/users", "method": "POST", "error": "decode json: EOF"}
+2026-09-12T21:24:23.306311	DEBUG	middleware/common.go:86	<<< done HTTP request	{"request_id": "51f0b54d-6b56-4b7f-a291-83cc1f6da535", "url": "/api/v1/users", "method": "POST", "status_code": 500, "latency": "781.209µs"}
+2026-09-12T21:24:30.078796	DEBUG	middleware/common.go:79	>>> incoming http request	{"request_id": "d42122f6-92ee-4624-96e1-e2e39092a1c0", "url": "/api/v1/users", "method": "POST", "time": "2026-09-12T18:24:30.078793"}
+2026-09-12T21:24:30.078955	DEBUG	http/create_user.go:33	invoke create user handler	{"request_id": "d42122f6-92ee-4624-96e1-e2e39092a1c0", "url": "/api/v1/users", "method": "POST"}
+2026-09-12T21:24:30.079040	ERROR	response/handler.go:55	Failed to decode and validate CreateUser request	{"request_id": "d42122f6-92ee-4624-96e1-e2e39092a1c0", "url": "/api/v1/users", "method": "POST", "error": "decode json: invalid character '}' after object key"}
+2026-09-12T21:24:30.079108	DEBUG	middleware/common.go:86	<<< done HTTP request	{"request_id": "d42122f6-92ee-4624-96e1-e2e39092a1c0", "url": "/api/v1/users", "method": "POST", "status_code": 500, "latency": "313.708µs"}
+2026-09-12T21:24:40.748547	DEBUG	middleware/common.go:79	>>> incoming http request	{"request_id": "129d1603-e867-4d52-9816-ea61e28c0c56", "url": "/api/v1/users", "method": "POST", "time": "2026-09-12T18:24:40.748545"}
+2026-09-12T21:24:40.748705	DEBUG	http/create_user.go:33	invoke create user handler	{"request_id": "129d1603-e867-4d52-9816-ea61e28c0c56", "url": "/api/v1/users", "method": "POST"}
+2026-09-12T21:24:40.749907	ERROR	response/handler.go:55	Failed to decode and validate CreateUser request	{"request_id": "129d1603-e867-4d52-9816-ea61e28c0c56", "url": "/api/v1/users", "method": "POST", "error": "validate json: Key: 'CreateUserRequest.Password' Error:Field validation for 'Password' failed on the 'required' tag\nKey: 'CreateUserRequest.Name' Error:Field validation for 'Name' failed on the 'required' tag"}
+2026-09-12T21:24:40.750041	DEBUG	middleware/common.go:86	<<< done HTTP request	{"request_id": "129d1603-e867-4d52-9816-ea61e28c0c56", "url": "/api/v1/users", "method": "POST", "status_code": 500, "latency": "1.495375ms"}
+2026-09-12T21:25:25.711125	DEBUG	middleware/common.go:79	>>> incoming http request	{"request_id": "16a86d5c-f40b-4988-b9b5-d91df14e6e52", "url": "/api/v1/users", "method": "POST", "time": "2026-09-12T18:25:25.711123"}
+2026-09-12T21:25:25.711233	DEBUG	http/create_user.go:33	invoke create user handler	{"request_id": "16a86d5c-f40b-4988-b9b5-d91df14e6e52", "url": "/api/v1/users", "method": "POST"}
+2026-09-12T21:25:25.711304	ERROR	response/handler.go:55	Failed to decode and validate CreateUser request	{"request_id": "16a86d5c-f40b-4988-b9b5-d91df14e6e52", "url": "/api/v1/users", "method": "POST", "error": "validate json: Key: 'CreateUserRequest.Password' Error:Field validation for 'Password' failed on the 'min' tag"}
+2026-09-12T21:25:25.711364	DEBUG	middleware/common.go:86	<<< done HTTP request	{"request_id": "16a86d5c-f40b-4988-b9b5-d91df14e6e52", "url": "/api/v1/users", "method": "POST", "status_code": 500, "latency": "239.917µs"}
+2026-09-12T21:25:32.819978	DEBUG	middleware/common.go:79	>>> incoming http request	{"request_id": "073a2a18-48bc-4efd-8db1-da3a0324d91b", "url": "/api/v1/users", "method": "POST", "time": "2026-09-12T18:25:32.819976"}
+2026-09-12T21:25:32.820155	DEBUG	http/create_user.go:33	invoke create user handler	{"request_id": "073a2a18-48bc-4efd-8db1-da3a0324d91b", "url": "/api/v1/users", "method": "POST"}
+2026-09-12T21:25:32.820479	ERROR	response/handler.go:64	during handle HTTP request got unexpected panic	{"request_id": "073a2a18-48bc-4efd-8db1-da3a0324d91b", "url": "/api/v1/users", "method": "POST", "error": "unexpected panic: runtime error: invalid memory address or nil pointer dereference"}
+2026-09-12T21:25:42.838264	WARN	server/server.go:65	shutting down http server
+2026-09-12T21:25:42.838892	WARN	server/server.go:76	http server shutdown completed

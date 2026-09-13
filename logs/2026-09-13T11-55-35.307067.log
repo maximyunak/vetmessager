@@ -1,0 +1,17 @@
+2026-09-13T14:55:35.307401	DEBUG	qzlt/main.go:32	Initializing postgtes connection pool
+2026-09-13T14:55:35.322799	DEBUG	qzlt/main.go:39	initializing feature	{"feature": "users"}
+2026-09-13T14:55:35.323043	WARN	server/server.go:50	starting http server on 	{"addr": ":5050"}
+2026-09-13T14:55:40.534626	DEBUG	middleware/common.go:79	>>> incoming http request	{"request_id": "6d45464e-3ce9-43ca-90e5-bdf75d8ab2b6", "url": "/api/v1/users", "method": "POST", "time": "2026-09-13T11:55:40.534621"}
+2026-09-13T14:55:40.534828	DEBUG	http/create_user.go:33	invoke create user handler	{"request_id": "6d45464e-3ce9-43ca-90e5-bdf75d8ab2b6", "url": "/api/v1/users", "method": "POST"}
+2026-09-13T14:55:40.587564	ERROR	response/handler.go:55	Failed to create user	{"request_id": "6d45464e-3ce9-43ca-90e5-bdf75d8ab2b6", "url": "/api/v1/users", "method": "POST", "error": "create user: scan error: ERROR: duplicate key value violates unique constraint \"users_email_key\" (SQLSTATE 23505)"}
+2026-09-13T14:55:40.587763	DEBUG	middleware/common.go:86	<<< done HTTP request	{"request_id": "6d45464e-3ce9-43ca-90e5-bdf75d8ab2b6", "url": "/api/v1/users", "method": "POST", "status_code": 500, "latency": "53.14025ms"}
+2026-09-13T14:55:44.310219	DEBUG	middleware/common.go:79	>>> incoming http request	{"request_id": "1aa3a18d-7631-4730-af7b-bf5d7162e1f2", "url": "/api/v1/users", "method": "POST", "time": "2026-09-13T11:55:44.310218"}
+2026-09-13T14:55:44.310294	DEBUG	http/create_user.go:33	invoke create user handler	{"request_id": "1aa3a18d-7631-4730-af7b-bf5d7162e1f2", "url": "/api/v1/users", "method": "POST"}
+2026-09-13T14:55:44.314664	ERROR	response/handler.go:55	Failed to create user	{"request_id": "1aa3a18d-7631-4730-af7b-bf5d7162e1f2", "url": "/api/v1/users", "method": "POST", "error": "create user: scan error: number of field descriptions must equal number of destinations, got 4 and 3"}
+2026-09-13T14:55:44.314723	DEBUG	middleware/common.go:86	<<< done HTTP request	{"request_id": "1aa3a18d-7631-4730-af7b-bf5d7162e1f2", "url": "/api/v1/users", "method": "POST", "status_code": 500, "latency": "4.505292ms"}
+2026-09-13T14:56:17.399539	DEBUG	middleware/common.go:79	>>> incoming http request	{"request_id": "c7e80840-a83d-44cc-b34d-9a88ba0645ef", "url": "/api/v1/users", "method": "POST", "time": "2026-09-13T11:56:17.399538"}
+2026-09-13T14:56:17.399608	DEBUG	http/create_user.go:33	invoke create user handler	{"request_id": "c7e80840-a83d-44cc-b34d-9a88ba0645ef", "url": "/api/v1/users", "method": "POST"}
+2026-09-13T14:56:17.405909	ERROR	response/handler.go:55	Failed to create user	{"request_id": "c7e80840-a83d-44cc-b34d-9a88ba0645ef", "url": "/api/v1/users", "method": "POST", "error": "create user: scan error: number of field descriptions must equal number of destinations, got 4 and 3"}
+2026-09-13T14:56:17.406035	DEBUG	middleware/common.go:86	<<< done HTTP request	{"request_id": "c7e80840-a83d-44cc-b34d-9a88ba0645ef", "url": "/api/v1/users", "method": "POST", "status_code": 500, "latency": "6.496333ms"}
+2026-09-13T14:56:58.630344	WARN	server/server.go:65	shutting down http server
+2026-09-13T14:56:58.630867	WARN	server/server.go:76	http server shutdown completed

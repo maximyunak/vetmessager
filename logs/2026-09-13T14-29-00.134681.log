@@ -1,0 +1,8 @@
+2026-09-13T17:29:00.134753	DEBUG	qzlt/main.go:32	Initializing postgtes connection pool
+2026-09-13T17:29:00.146935	DEBUG	qzlt/main.go:39	initializing feature	{"feature": "users"}
+2026-09-13T17:29:00.147009	WARN	server/server.go:50	starting http server on 	{"addr": ":5050"}
+2026-09-13T17:29:02.260790	DEBUG	middleware/common.go:79	>>> incoming http request	{"request_id": "765b5d8f-f4d4-4736-9f5c-718d02679f3a", "url": "/api/v1/users", "method": "POST", "time": "2026-09-13T14:29:02.260789"}
+2026-09-13T17:29:02.260830	DEBUG	http/create_user.go:33	invoke create user handler	{"request_id": "765b5d8f-f4d4-4736-9f5c-718d02679f3a", "url": "/api/v1/users", "method": "POST"}
+2026-09-13T17:29:02.266878	DEBUG	middleware/common.go:86	<<< done HTTP request	{"request_id": "765b5d8f-f4d4-4736-9f5c-718d02679f3a", "url": "/api/v1/users", "method": "POST", "status_code": 201, "latency": "6.088875ms"}
+2026-09-13T17:32:23.766410	WARN	server/server.go:65	shutting down http server
+2026-09-13T17:32:23.767224	WARN	server/server.go:76	http server shutdown completed

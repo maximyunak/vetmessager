@@ -1,0 +1,22 @@
+CREATE TABLE users
+(
+    id         SERIAL PRIMARY KEY,
+    email      VARCHAR(100) UNIQUE,
+    password   VARCHAR(100) NOT NULL,
+    name       VARCHAR(255) NOT NULL,
+
+    created_at TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE decks
+(
+    id         SERIAL PRIMARY KEY,
+    title      VARCHAR(255) NOT NULL,
+    author_id  INT          NOT NULL,
+
+    created_at TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (author_id) REFERENCES users (id) ON DELETE SET NULL
+)
+

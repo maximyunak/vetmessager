@@ -1,0 +1,2 @@
+2026-09-13T17:28:16.627555	DEBUG	qzlt/main.go:32	Initializing postgtes connection pool
+2026-09-13T17:28:16.631660	FATAL	qzlt/main.go:35	Failed to connect to postgres	{"error": "ping connection pool: failed to connect to `user=test-user database=quizlet`:\n\t[::1]:5432 (localhost): dial error: dial tcp [::1]:5432: connect: connection refused\n\t127.0.0.1:5432 (localhost): dial error: dial tcp 127.0.0.1:5432: connect: connection refused"}
