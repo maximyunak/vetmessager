@@ -21,7 +21,7 @@ func (r *UsersRepository) FindUserByEmail(ctx context.Context, email string) (do
 	if err != nil {
 		return domain.User{}, fmt.Errorf("scan error: %w", err)
 	}
-
+	
 	userDomain := domain.NewUser(userModel.ID, userModel.Name, userModel.Email, userModel.Password)
 
 	return userDomain, nil

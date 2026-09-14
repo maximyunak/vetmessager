@@ -42,6 +42,6 @@ func (h *UsersHTTPHandler) Login(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	response := DtoFromDomain(userDomain)
+	response := UserDTOFromDomain(userDomain)
 	responseHandler.JSONResponse(response, http.StatusOK)
 }

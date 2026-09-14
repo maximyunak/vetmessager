@@ -2,7 +2,6 @@ package users_transport_http
 
 import (
 	"net/http"
-	"time"
 
 	"github.com/maximyunak/qzltgo/internal/core/domain"
 	core_logger "github.com/maximyunak/qzltgo/internal/core/logger"
@@ -16,14 +15,7 @@ type CreateUserRequest struct {
 	Name     string `json:"name" validate:"required,min=5,max=255"`
 }
 
-type CreateUserResponse struct {
-	ID        int       `json:"id"`
-	Email     string    `json:"email"`
-	Password  string    `json:"password"`
-	Name      string    `json:"name"`
-	CreatedAt time.Time `json:"created_at"`
-	UpdatedAt time.Time `json:"updated_at"`
-}
+type CreateUserResponse UserDTOResponse
 
 func (h *UsersHTTPHandler) CreateUser(w http.ResponseWriter, r *http.Request) {
 	ctx := r.Context()
@@ -47,22 +39,11 @@ func (h *UsersHTTPHandler) CreateUser(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	response := DtoFromDomain(userDomain)
+	response := CreateUserResponse(UserDTOFromDomain(userDomain))
 
 	responseHandler.JSONResponse(response, http.StatusCreated)
 }
 
 func domainFromDTO(dto CreateUserRequest) domain.User {
 	return domain.NewUserUninitialized(dto.Name, dto.Email, dto.Password)
-}
-
-func DtoFromDomain(user domain.User) CreateUserResponse {
-	return CreateUserResponse{
-		ID:        user.ID,
-		Email:     user.Email,
-		Name:      user.Name,
-		Password:  user.Password,
-		CreatedAt: user.CreatedAt,
-		UpdatedAt: user.UpdatedAt,
-	}
 }

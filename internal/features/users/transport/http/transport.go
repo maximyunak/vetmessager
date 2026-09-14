@@ -43,5 +43,10 @@ func (h *UsersHTTPHandler) Routes() []core_http_server.Route {
 			Path:    "/login",
 			Handler: h.Login,
 		},
+		{
+			Method:  http.MethodGet,
+			Path:    "/users",
+			Handler: h.GetUsers,
+		},
 	}
 }

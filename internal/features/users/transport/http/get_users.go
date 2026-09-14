@@ -9,8 +9,7 @@ import (
 	core_http_utils "github.com/maximyunak/qzltgo/internal/core/transport/http/utils"
 )
 
-type GetUsersResponse struct {
-}
+type GetUsersResponse []UserDTOResponse
 
 func (h *UsersHTTPHandler) GetUsers(w http.ResponseWriter, r *http.Request) {
 	ctx := r.Context()
@@ -31,7 +30,9 @@ func (h *UsersHTTPHandler) GetUsers(w http.ResponseWriter, r *http.Request) {
 		responseHandler.ErrorResponse(err, "failed to get users")
 	}
 
-	responseHandler.JSONResponse(userDomains, http.StatusOK)
+	response := GetUsersResponse(UsersDTOFromDomain(userDomains))
+
+	responseHandler.JSONResponse(response, http.StatusOK)
 }
 
 func getLimitOffsetQueryParams(r *http.Request) (*int, *int, error) {
