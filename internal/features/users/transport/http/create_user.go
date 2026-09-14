@@ -31,7 +31,7 @@ func (h *UsersHTTPHandler) CreateUser(w http.ResponseWriter, r *http.Request) {
 	responseHandler := core_http_response.NewHTTPResponseHandler(log, w)
 
 	log.Debug("invoke create user handler")
-	// ...
+
 	var request CreateUserRequest
 
 	if err := core_http_request.DecodeAndValidateRequest(r, &request); err != nil {
@@ -47,7 +47,7 @@ func (h *UsersHTTPHandler) CreateUser(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	response := dtoFromDomain(userDomain)
+	response := DtoFromDomain(userDomain)
 
 	responseHandler.JSONResponse(response, http.StatusCreated)
 }
@@ -56,7 +56,7 @@ func domainFromDTO(dto CreateUserRequest) domain.User {
 	return domain.NewUserUninitialized(dto.Name, dto.Email, dto.Password)
 }
 
-func dtoFromDomain(user domain.User) CreateUserResponse {
+func DtoFromDomain(user domain.User) CreateUserResponse {
 	return CreateUserResponse{
 		ID:        user.ID,
 		Email:     user.Email,

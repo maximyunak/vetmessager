@@ -17,6 +17,12 @@ type UsersService interface {
 		ctx context.Context,
 		user domain.User,
 	) (domain.User, error)
+	Login(
+		ctx context.Context, email string, password string,
+	) (domain.User, error)
+	GetUsers(
+		ctx context.Context, limit *int, offset *int,
+	) ([]domain.User, error)
 }
 
 func NewUsersHTTPHandler(usersService UsersService) *UsersHTTPHandler {
@@ -29,8 +35,13 @@ func (h *UsersHTTPHandler) Routes() []core_http_server.Route {
 	return []core_http_server.Route{
 		{
 			Method:  http.MethodPost,
-			Path:    "/users",
+			Path:    "/register",
 			Handler: h.CreateUser,
+		},
+		{
+			Method:  http.MethodPost,
+			Path:    "/login",
+			Handler: h.Login,
 		},
 	}
 }

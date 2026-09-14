@@ -16,6 +16,7 @@ type UsersRepository interface {
 		ctx context.Context,
 		user domain.User,
 	) (domain.User, error)
+	FindUserByEmail(ctx context.Context, email string) (domain.User, error)
 }
 
 func NewUsersService(usersRepository UsersRepository, passwordHasher PasswordHasher) *UsersService {

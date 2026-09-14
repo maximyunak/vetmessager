@@ -36,12 +36,12 @@ func (u User) Validate() error {
 		return fmt.Errorf("invalid `name` length: %d", nameLength, core_errors.ErrInvalidArgument)
 	}
 
-	passwordLength := len([]rune(u.Name))
+	passwordLength := len([]rune(u.Password))
 	if passwordLength < 3 || passwordLength > 100 {
 		return fmt.Errorf("invalid `name` length: %d", passwordLength, core_errors.ErrInvalidArgument)
 	}
 
-	emailLength := len([]rune(u.Name))
+	emailLength := len([]rune(u.Email))
 	if emailLength < 3 || emailLength > 100 {
 		return fmt.Errorf("invalid `name` length: %d", emailLength, core_errors.ErrInvalidArgument)
 	}
