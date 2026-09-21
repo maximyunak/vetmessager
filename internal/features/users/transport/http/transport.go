@@ -19,7 +19,7 @@ type UsersService interface {
 	) (domain.User, error)
 	Login(
 		ctx context.Context, email string, password string,
-	) (domain.User, error)
+	) (string, error)
 	GetUsers(
 		ctx context.Context, limit *int, offset *int,
 	) ([]domain.User, error)

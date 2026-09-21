@@ -6,6 +6,7 @@ import (
 	"os/signal"
 	"syscall"
 
+	"github.com/maximyunak/vetmessager/internal/core/auth"
 	core_logger "github.com/maximyunak/vetmessager/internal/core/logger"
 	"github.com/maximyunak/vetmessager/internal/core/password"
 	core_postgres_pool "github.com/maximyunak/vetmessager/internal/core/repository/postgres/pull"
@@ -44,10 +45,14 @@ func main() {
 	}
 	defer pool.Close()
 
+	// jwt
+	tokenManager := auth.NewJWTManager(auth.NewConfigMust())
+
+	// user feature
 	logger.Debug("initializing feature", zap.String("feature", "users"))
 	passwordHasher := password.NewBcryptHasher(password.NewConfigMust())
 	usersRepository := users_postgres_repository.NewUsersRepository(pool)
-	usersService := users_service.NewUsersService(usersRepository, passwordHasher)
+	usersService := users_service.NewUsersService(usersRepository, passwordHasher, tokenManager)
 
 	usersTransportHTTP := users_transport_http.NewUsersHTTPHandler(usersService)
 	userRoutes := usersTransportHTTP.Routes()

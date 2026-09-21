@@ -2,7 +2,6 @@ package users_transport_http
 
 import (
 	"net/http"
-	"time"
 
 	core_logger "github.com/maximyunak/vetmessager/internal/core/logger"
 	core_http_request "github.com/maximyunak/vetmessager/internal/core/transport/http/request"
@@ -13,15 +12,8 @@ type LoginRequest struct {
 	Email    string `json:"email" validate:"required,email,min=5,max=100"`
 	Password string `json:"password" validate:"required,min=5,max=100"`
 }
-
 type LoginResponse struct {
-	ID        int       `json:"id"`
-	Email     string    `json:"email"`
-	Username  string    `json:"name"`
-	FirstName string    `json:"first_name"`
-	LastName  string    `json:"last_name"`
-	CreatedAt time.Time `json:"created_at"`
-	UpdatedAt time.Time `json:"updated_at"`
+	AccessToken string `json:"access_token"`
 }
 
 func (h *UsersHTTPHandler) Login(w http.ResponseWriter, r *http.Request) {
@@ -38,12 +30,12 @@ func (h *UsersHTTPHandler) Login(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	userDomain, err := h.usersService.Login(ctx, request.Email, request.Password)
+	accessToken, err := h.usersService.Login(ctx, request.Email, request.Password)
 	if err != nil {
 		responseHandler.ErrorResponse(err, "Failed to login")
 		return
 	}
 
-	response := UserDTOFromDomain(userDomain)
+	response := LoginResponse{accessToken}
 	responseHandler.JSONResponse(response, http.StatusOK)
 }
