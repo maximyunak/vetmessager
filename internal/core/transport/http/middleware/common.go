@@ -6,8 +6,8 @@ import (
 	"time"
 
 	"github.com/google/uuid"
-	core_logger "github.com/maximyunak/qzltgo/internal/core/logger"
-	core_http_response "github.com/maximyunak/qzltgo/internal/core/transport/http/response"
+	core_logger "github.com/maximyunak/vetmessager/internal/core/logger"
+	core_http_response "github.com/maximyunak/vetmessager/internal/core/transport/http/response"
 	"go.uber.org/zap"
 )
 

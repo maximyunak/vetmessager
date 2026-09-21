@@ -59,4 +59,4 @@ connect-db:
 app-run:
 	@export POSTGRES_HOST=localhost && \
 	go mod tidy && \
-	go run cmd/qzlt/main.go
+	go run cmd/vetmessager/main.go

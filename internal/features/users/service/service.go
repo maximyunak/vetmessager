@@ -3,7 +3,7 @@ package users_service
 import (
 	"context"
 
-	"github.com/maximyunak/qzltgo/internal/core/domain"
+	"github.com/maximyunak/vetmessager/internal/core/domain"
 )
 
 type UsersService struct {

@@ -4,9 +4,9 @@ import (
 	"net/http"
 	"time"
 
-	core_logger "github.com/maximyunak/qzltgo/internal/core/logger"
-	core_http_request "github.com/maximyunak/qzltgo/internal/core/transport/http/request"
-	core_http_response "github.com/maximyunak/qzltgo/internal/core/transport/http/response"
+	core_logger "github.com/maximyunak/vetmessager/internal/core/logger"
+	core_http_request "github.com/maximyunak/vetmessager/internal/core/transport/http/request"
+	core_http_response "github.com/maximyunak/vetmessager/internal/core/transport/http/response"
 )
 
 type LoginRequest struct {
@@ -17,7 +17,9 @@ type LoginRequest struct {
 type LoginResponse struct {
 	ID        int       `json:"id"`
 	Email     string    `json:"email"`
-	Name      string    `json:"name"`
+	Username  string    `json:"name"`
+	FirstName string    `json:"first_name"`
+	LastName  string    `json:"last_name"`
 	CreatedAt time.Time `json:"created_at"`
 	UpdatedAt time.Time `json:"updated_at"`
 }

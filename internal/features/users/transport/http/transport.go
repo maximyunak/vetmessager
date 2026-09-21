@@ -4,8 +4,8 @@ import (
 	"context"
 	"net/http"
 
-	"github.com/maximyunak/qzltgo/internal/core/domain"
-	core_http_server "github.com/maximyunak/qzltgo/internal/core/transport/http/server"
+	"github.com/maximyunak/vetmessager/internal/core/domain"
+	core_http_server "github.com/maximyunak/vetmessager/internal/core/transport/http/server"
 )
 
 type UsersHTTPHandler struct {

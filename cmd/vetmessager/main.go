@@ -6,14 +6,14 @@ import (
 	"os/signal"
 	"syscall"
 
-	core_logger "github.com/maximyunak/qzltgo/internal/core/logger"
-	"github.com/maximyunak/qzltgo/internal/core/password"
-	core_postgres_pool "github.com/maximyunak/qzltgo/internal/core/repository/postgres/pull"
-	core_http_middleware "github.com/maximyunak/qzltgo/internal/core/transport/http/middleware"
-	core_http_server "github.com/maximyunak/qzltgo/internal/core/transport/http/server"
-	users_postgres_repository "github.com/maximyunak/qzltgo/internal/features/users/repository/postgres"
-	users_service "github.com/maximyunak/qzltgo/internal/features/users/service"
-	users_transport_http "github.com/maximyunak/qzltgo/internal/features/users/transport/http"
+	core_logger "github.com/maximyunak/vetmessager/internal/core/logger"
+	"github.com/maximyunak/vetmessager/internal/core/password"
+	core_postgres_pool "github.com/maximyunak/vetmessager/internal/core/repository/postgres/pull"
+	core_http_middleware "github.com/maximyunak/vetmessager/internal/core/transport/http/middleware"
+	core_http_server "github.com/maximyunak/vetmessager/internal/core/transport/http/server"
+	users_postgres_repository "github.com/maximyunak/vetmessager/internal/features/users/repository/postgres"
+	users_service "github.com/maximyunak/vetmessager/internal/features/users/service"
+	users_transport_http "github.com/maximyunak/vetmessager/internal/features/users/transport/http"
 	"go.uber.org/zap"
 )
 

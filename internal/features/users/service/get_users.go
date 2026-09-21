@@ -4,11 +4,11 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/maximyunak/qzltgo/internal/core/domain"
-	core_errors "github.com/maximyunak/qzltgo/internal/core/errors"
+	"github.com/maximyunak/vetmessager/internal/core/domain"
+	core_errors "github.com/maximyunak/vetmessager/internal/core/errors"
 )
 
-func (s UsersService) GetUsers(
+func (s *UsersService) GetUsers(
 	ctx context.Context, limit *int, offset *int,
 ) ([]domain.User, error) {
 	if limit != nil && *limit < 0 {

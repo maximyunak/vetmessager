@@ -4,7 +4,7 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/maximyunak/qzltgo/internal/core/domain"
+	"github.com/maximyunak/vetmessager/internal/core/domain"
 )
 
 func (r *UsersRepository) FindUserByEmail(ctx context.Context, email string) (domain.User, error) {
@@ -12,17 +12,17 @@ func (r *UsersRepository) FindUserByEmail(ctx context.Context, email string) (do
 	defer cancel()
 
 	query := `
-	SELECT id, name, email, password, created_at, updated_at FROM users WHERE email = $1
+	SELECT id, username, first_name, last_name, email, password, created_at, updated_at FROM users WHERE email = $1
 	`
 	row := r.pool.QueryRow(ctx, query, email)
 
 	var userModel UserModel
-	err := row.Scan(&userModel.ID, &userModel.Name, &userModel.Email, &userModel.Password, &userModel.CreatedAt, &userModel.UpdatedAt)
+	err := row.Scan(&userModel.ID, &userModel.UserName, &userModel.FirstName, &userModel.LastName, &userModel.Email, &userModel.Password, &userModel.CreatedAt, &userModel.UpdatedAt)
 	if err != nil {
 		return domain.User{}, fmt.Errorf("scan error: %w", err)
 	}
-	
-	userDomain := domain.NewUser(userModel.ID, userModel.Name, userModel.Email, userModel.Password)
+
+	userDomain := domain.NewUser(userModel.ID, userModel.UserName, userModel.FirstName, userModel.LastName, userModel.Email, userModel.Password, userModel.CreatedAt, userModel.UpdatedAt)
 
 	return userDomain, nil
 }

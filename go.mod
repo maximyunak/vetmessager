@@ -1,4 +1,4 @@
-module github.com/maximyunak/qzltgo
+module github.com/maximyunak/vetmessager
 
 go 1.26.0
 

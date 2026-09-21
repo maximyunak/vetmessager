@@ -3,16 +3,18 @@ package users_transport_http
 import (
 	"net/http"
 
-	"github.com/maximyunak/qzltgo/internal/core/domain"
-	core_logger "github.com/maximyunak/qzltgo/internal/core/logger"
-	core_http_request "github.com/maximyunak/qzltgo/internal/core/transport/http/request"
-	core_http_response "github.com/maximyunak/qzltgo/internal/core/transport/http/response"
+	"github.com/maximyunak/vetmessager/internal/core/domain"
+	core_logger "github.com/maximyunak/vetmessager/internal/core/logger"
+	core_http_request "github.com/maximyunak/vetmessager/internal/core/transport/http/request"
+	core_http_response "github.com/maximyunak/vetmessager/internal/core/transport/http/response"
 )
 
 type CreateUserRequest struct {
-	Email    string `json:"email" validate:"required,email,min=5,max=100"`
-	Password string `json:"password" validate:"required,min=5,max=100"`
-	Name     string `json:"name" validate:"required,min=5,max=255"`
+	Username  string `json:"username" validate:"required,min=5,max=255"`
+	FirstName string `json:"first_name" validate:"required,min=5,max=255"`
+	LastName  string `json:"last_name" validate:"required,min=5,max=255"`
+	Email     string `json:"email" validate:"required,email,min=5,max=100"`
+	Password  string `json:"password" validate:"required,min=5,max=100"`
 }
 
 type CreateUserResponse UserDTOResponse
@@ -45,5 +47,5 @@ func (h *UsersHTTPHandler) CreateUser(w http.ResponseWriter, r *http.Request) {
 }
 
 func domainFromDTO(dto CreateUserRequest) domain.User {
-	return domain.NewUserUninitialized(dto.Name, dto.Email, dto.Password)
+	return domain.NewUserUninitialized(dto.Username, dto.FirstName, dto.LastName, dto.Email, dto.Password)
 }

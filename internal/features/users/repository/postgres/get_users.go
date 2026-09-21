@@ -4,7 +4,7 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/maximyunak/qzltgo/internal/core/domain"
+	"github.com/maximyunak/vetmessager/internal/core/domain"
 )
 
 func (r *UsersRepository) GetUsers(ctx context.Context, limit *int, offset *int) ([]domain.User, error) {
@@ -12,7 +12,7 @@ func (r *UsersRepository) GetUsers(ctx context.Context, limit *int, offset *int)
 	defer cancel()
 
 	query := `
-	SELECT id, name, email, password, created_at, updated_at 
+	SELECT id, username,first_name,last_name, email, password, created_at, updated_at 
 	FROM users 
 	ORDER BY id ASC
 	LIMIT $1 
@@ -29,7 +29,7 @@ func (r *UsersRepository) GetUsers(ctx context.Context, limit *int, offset *int)
 	for rows.Next() {
 		var userModel UserModel
 
-		err := rows.Scan(&userModel.ID, &userModel.Name, &userModel.Email, &userModel.Password, &userModel.CreatedAt, &userModel.UpdatedAt)
+		err := rows.Scan(&userModel.ID, &userModel.UserName, &userModel.FirstName, &userModel.LastName, &userModel.Email, &userModel.Password, &userModel.CreatedAt, &userModel.UpdatedAt)
 		if err != nil {
 			return nil, fmt.Errorf("postgres scan: %w", err)
 		}

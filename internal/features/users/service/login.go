@@ -4,7 +4,7 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/maximyunak/qzltgo/internal/core/domain"
+	"github.com/maximyunak/vetmessager/internal/core/domain"
 )
 
 func (s *UsersService) Login(

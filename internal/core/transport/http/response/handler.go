@@ -6,8 +6,8 @@ import (
 	"fmt"
 	"net/http"
 
-	core_errors "github.com/maximyunak/qzltgo/internal/core/errors"
-	core_logger "github.com/maximyunak/qzltgo/internal/core/logger"
+	core_errors "github.com/maximyunak/vetmessager/internal/core/errors"
+	core_logger "github.com/maximyunak/vetmessager/internal/core/logger"
 	"go.uber.org/zap"
 )
 

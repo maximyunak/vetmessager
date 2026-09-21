@@ -4,9 +4,9 @@ import (
 	"fmt"
 	"net/http"
 
-	core_logger "github.com/maximyunak/qzltgo/internal/core/logger"
-	core_http_response "github.com/maximyunak/qzltgo/internal/core/transport/http/response"
-	core_http_utils "github.com/maximyunak/qzltgo/internal/core/transport/http/utils"
+	core_logger "github.com/maximyunak/vetmessager/internal/core/logger"
+	core_http_response "github.com/maximyunak/vetmessager/internal/core/transport/http/response"
+	core_http_utils "github.com/maximyunak/vetmessager/internal/core/transport/http/utils"
 )
 
 type GetUsersResponse []UserDTOResponse
