@@ -19,6 +19,17 @@ type CreateUserRequest struct {
 
 type CreateUserResponse UserDTOResponse
 
+// CreateUser godoc
+// @summary Create user
+// @description Register new user in the system
+// @tags users
+// @accept json
+// @produce json
+// @param request body CreateUserRequest true "CreateUser is request body"
+// @success 201 {object} CreateUserResponse "Success"
+// @failure 400 {object} core_http_response.ErrorResponse "Bad request"
+// @failure 500 {object} core_http_response.ErrorResponse "Internal server error"
+// @router /register [post]
 func (h *UsersHTTPHandler) CreateUser(w http.ResponseWriter, r *http.Request) {
 	ctx := r.Context()
 	log := core_logger.FromContext(ctx)

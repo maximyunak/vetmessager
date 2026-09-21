@@ -15,8 +15,15 @@ import (
 	users_service "github.com/maximyunak/vetmessager/internal/features/users/service"
 	users_transport_http "github.com/maximyunak/vetmessager/internal/features/users/transport/http"
 	"go.uber.org/zap"
+
+	_ "github.com/maximyunak/vetmessager/docs"
 )
 
+// @title           VetMessager
+// @version         1.0
+// @description    	Sveta the best
+// @host      localhost:5050
+// @BasePath  /api/v1
 func main() {
 	ctx, cancel := signal.NotifyContext(context.Background(),
 		syscall.SIGINT, syscall.SIGTERM)
@@ -58,6 +65,7 @@ func main() {
 	)
 
 	httpServer.RegisterApiRouters(apiVersionRouter)
+	httpServer.RegisterSwagger()
 
 	if err := httpServer.Run(ctx); err != nil {
 		logger.Error("failed to start http server", zap.Error(err))

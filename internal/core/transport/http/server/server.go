@@ -6,8 +6,11 @@ import (
 	"fmt"
 	"net/http"
 
+	"github.com/maximyunak/vetmessager/docs"
 	core_logger "github.com/maximyunak/vetmessager/internal/core/logger"
 	core_http_middleware "github.com/maximyunak/vetmessager/internal/core/transport/http/middleware"
+	_ "github.com/swaggo/http-swagger"
+	httpSwagger "github.com/swaggo/http-swagger"
 	"go.uber.org/zap"
 )
 
@@ -34,6 +37,17 @@ func (h *HTTPServer) RegisterApiRouters(routers ...*APIVersionRouter) {
 
 		h.mux.Handle(pref+"/", http.StripPrefix(pref, router))
 	}
+}
+
+func (h *HTTPServer) RegisterSwagger() {
+	h.mux.Handle("/swagger/", httpSwagger.Handler(
+		httpSwagger.URL("/swagger/doc.json"),
+	))
+	h.mux.HandleFunc("/swagger/doc.json", func(w http.ResponseWriter, r *http.Request) {
+		w.Header().Set("Content-Type", "application/json")
+		w.WriteHeader(http.StatusOK)
+		_, _ = w.Write([]byte(docs.SwaggerInfo.ReadDoc()))
+	})
 }
 
 func (h *HTTPServer) Run(ctx context.Context) error {
