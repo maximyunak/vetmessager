@@ -1,0 +1,9 @@
+2026-09-13T18:23:20.673992	DEBUG	qzlt/main.go:33	Initializing postgtes connection pool
+2026-09-13T18:23:20.694333	DEBUG	qzlt/main.go:40	initializing feature	{"feature": "users"}
+2026-09-13T18:23:20.694762	WARN	server/server.go:50	starting http server on 	{"addr": ":5050"}
+2026-09-13T18:23:22.620899	DEBUG	middleware/common.go:79	>>> incoming http request	{"request_id": "05e28593-f0b7-40e0-bbc6-630174be66cf", "url": "/api/v1/users", "method": "POST", "time": "2026-09-13T15:23:22.620895"}
+2026-09-13T18:23:22.621074	DEBUG	http/create_user.go:33	invoke create user handler	{"request_id": "05e28593-f0b7-40e0-bbc6-630174be66cf", "url": "/api/v1/users", "method": "POST"}
+2026-09-13T18:23:22.622165	ERROR	response/handler.go:55	Failed to decode and validate CreateUser request	{"request_id": "05e28593-f0b7-40e0-bbc6-630174be66cf", "url": "/api/v1/users", "method": "POST", "error": "validate json: Key: 'CreateUserRequest.Email' Error:Field validation for 'Email' failed on the 'required' tag\nKey: 'CreateUserRequest.Password' Error:Field validation for 'Password' failed on the 'required' tag\nKey: 'CreateUserRequest.Name' Error:Field validation for 'Name' failed on the 'required' tag"}
+2026-09-13T18:23:22.622359	DEBUG	middleware/common.go:86	<<< done HTTP request	{"request_id": "05e28593-f0b7-40e0-bbc6-630174be66cf", "url": "/api/v1/users", "method": "POST", "status_code": 500, "latency": "1.463791ms"}
+2026-09-13T18:24:51.148556	WARN	server/server.go:65	shutting down http server
+2026-09-13T18:24:51.149132	WARN	server/server.go:76	http server shutdown completed

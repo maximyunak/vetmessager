@@ -1,0 +1,23 @@
+2026-09-14T16:42:16.109872	DEBUG	qzlt/main.go:33	Initializing postgtes connection pool
+2026-09-14T16:42:16.129152	DEBUG	qzlt/main.go:40	initializing feature	{"feature": "users"}
+2026-09-14T16:42:16.129523	WARN	server/server.go:50	starting http server on 	{"addr": ":5050"}
+2026-09-14T16:42:17.796060	DEBUG	middleware/common.go:79	>>> incoming http request	{"request_id": "898deaf4-8a23-4fc7-b340-6dfdd222889f", "url": "/api/v1/users", "method": "GET", "time": "2026-09-14T13:42:17.796059"}
+2026-09-14T16:42:17.796099	DEBUG	http/get_users.go:19	invoke get users handler	{"request_id": "898deaf4-8a23-4fc7-b340-6dfdd222889f", "url": "/api/v1/users", "method": "GET"}
+2026-09-14T16:42:17.804949	DEBUG	middleware/common.go:86	<<< done HTTP request	{"request_id": "898deaf4-8a23-4fc7-b340-6dfdd222889f", "url": "/api/v1/users", "method": "GET", "status_code": 200, "latency": "8.888916ms"}
+2026-09-14T16:43:20.727333	DEBUG	middleware/common.go:79	>>> incoming http request	{"request_id": "7f1b5e4d-410e-4cc3-8f63-27a3849381eb", "url": "/api/v1/users?limit=5", "method": "GET", "time": "2026-09-14T13:43:20.727320"}
+2026-09-14T16:43:20.727432	DEBUG	http/get_users.go:19	invoke get users handler	{"request_id": "7f1b5e4d-410e-4cc3-8f63-27a3849381eb", "url": "/api/v1/users?limit=5", "method": "GET"}
+2026-09-14T16:43:20.732323	DEBUG	middleware/common.go:86	<<< done HTTP request	{"request_id": "7f1b5e4d-410e-4cc3-8f63-27a3849381eb", "url": "/api/v1/users?limit=5", "method": "GET", "status_code": 200, "latency": "5.000875ms"}
+2026-09-14T16:43:26.747164	DEBUG	middleware/common.go:79	>>> incoming http request	{"request_id": "04396d76-faba-4a00-80f9-ccf8563a67da", "url": "/api/v1/users?limit=5&offset=1", "method": "GET", "time": "2026-09-14T13:43:26.747162"}
+2026-09-14T16:43:26.747233	DEBUG	http/get_users.go:19	invoke get users handler	{"request_id": "04396d76-faba-4a00-80f9-ccf8563a67da", "url": "/api/v1/users?limit=5&offset=1", "method": "GET"}
+2026-09-14T16:43:26.750303	DEBUG	middleware/common.go:86	<<< done HTTP request	{"request_id": "04396d76-faba-4a00-80f9-ccf8563a67da", "url": "/api/v1/users?limit=5&offset=1", "method": "GET", "status_code": 200, "latency": "3.137709ms"}
+2026-09-14T16:43:27.953414	DEBUG	middleware/common.go:79	>>> incoming http request	{"request_id": "09e597b3-4b65-4299-b01a-abef9cec65c8", "url": "/api/v1/users?limit=5&offset=2", "method": "GET", "time": "2026-09-14T13:43:27.953412"}
+2026-09-14T16:43:27.953481	DEBUG	http/get_users.go:19	invoke get users handler	{"request_id": "09e597b3-4b65-4299-b01a-abef9cec65c8", "url": "/api/v1/users?limit=5&offset=2", "method": "GET"}
+2026-09-14T16:43:27.956735	DEBUG	middleware/common.go:86	<<< done HTTP request	{"request_id": "09e597b3-4b65-4299-b01a-abef9cec65c8", "url": "/api/v1/users?limit=5&offset=2", "method": "GET", "status_code": 200, "latency": "3.321542ms"}
+2026-09-14T16:43:42.168100	DEBUG	middleware/common.go:79	>>> incoming http request	{"request_id": "ffa11b58-6af0-4405-94ab-6775d59e9276", "url": "/api/v1/users?limit=5&offset=0", "method": "GET", "time": "2026-09-14T13:43:42.168099"}
+2026-09-14T16:43:42.168174	DEBUG	http/get_users.go:19	invoke get users handler	{"request_id": "ffa11b58-6af0-4405-94ab-6775d59e9276", "url": "/api/v1/users?limit=5&offset=0", "method": "GET"}
+2026-09-14T16:43:42.171652	DEBUG	middleware/common.go:86	<<< done HTTP request	{"request_id": "ffa11b58-6af0-4405-94ab-6775d59e9276", "url": "/api/v1/users?limit=5&offset=0", "method": "GET", "status_code": 200, "latency": "3.550542ms"}
+2026-09-14T16:43:47.989032	DEBUG	middleware/common.go:79	>>> incoming http request	{"request_id": "ff379956-d008-49b5-8613-bb9bd6bc38e7", "url": "/api/v1/users?limit=5&offset=0", "method": "GET", "time": "2026-09-14T13:43:47.989031"}
+2026-09-14T16:43:47.989104	DEBUG	http/get_users.go:19	invoke get users handler	{"request_id": "ff379956-d008-49b5-8613-bb9bd6bc38e7", "url": "/api/v1/users?limit=5&offset=0", "method": "GET"}
+2026-09-14T16:43:47.993265	DEBUG	middleware/common.go:86	<<< done HTTP request	{"request_id": "ff379956-d008-49b5-8613-bb9bd6bc38e7", "url": "/api/v1/users?limit=5&offset=0", "method": "GET", "status_code": 200, "latency": "4.232083ms"}
+2026-09-14T16:46:47.262598	WARN	server/server.go:65	shutting down http server
+2026-09-14T16:46:47.263837	WARN	server/server.go:76	http server shutdown completed
