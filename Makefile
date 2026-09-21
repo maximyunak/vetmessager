@@ -60,3 +60,17 @@ app-run:
 	@export POSTGRES_HOST=localhost && \
 	go mod tidy && \
 	go run cmd/vetmessager/main.go
+
+swagger-gen:
+	@docker compose run --rm swagger \
+		init \
+		-g cmd/vetmessager/main.go \
+		-o docs \
+		--parseInternal \
+		--parseDependency
+
+app-deploy:
+	@docker compose up -d --build vetmessager
+
+make ps:
+	@docker compose ps
