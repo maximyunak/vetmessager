@@ -12,7 +12,7 @@ func (s *UsersService) Login(
 	email string,
 	password string,
 ) (string, error) {
-	user, err := s.UsersRepository.FindUserByEmail(ctx, email)
+	user, err := s.UsersRepository.GetUserByEmail(ctx, email)
 	if err != nil {
 		return "", fmt.Errorf("User not found %v: %w", err, core_errors.ErrNotFound)
 	}

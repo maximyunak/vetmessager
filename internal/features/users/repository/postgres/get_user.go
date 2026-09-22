@@ -7,7 +7,7 @@ import (
 	"github.com/maximyunak/vetmessager/internal/core/domain"
 )
 
-func (r *UsersRepository) FindUserByEmail(ctx context.Context, email string) (domain.User, error) {
+func (r *UsersRepository) GetUserByEmail(ctx context.Context, email string) (domain.User, error) {
 	ctx, cancel := context.WithTimeout(ctx, r.pool.OpTimeout())
 	defer cancel()
 
