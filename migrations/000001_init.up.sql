@@ -4,7 +4,8 @@ CREATE TABLE users
     email      VARCHAR(100) UNIQUE NOT NULL,
     password   VARCHAR(100)        NOT NULL,
     username   VARCHAR(255)        NOT NULL,
-    full_name  VARCHAR(100)        NOT NULL,
+    first_name VARCHAR(100)        NOT NULL,
+    last_name  VARCHAR(100)        NOT NULL,
 
     created_at TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP
@@ -41,12 +42,12 @@ CREATE TYPE chat_roles AS ENUM('admin', 'owner', 'moderator', 'user');
 
 CREATE TABLE chat_members
 (
-    chat_id    INT NOT NULL,
-    user_id    INT NOT NULL,
+    chat_id    INT        NOT NULL,
+    user_id    INT        NOT NULL,
     role       chat_roles NOT NULL DEFAULT 'user',
 
-    created_at TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP,
-    updated_at TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP,
+    created_at TIMESTAMPTZ         DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMPTZ         DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (chat_id) REFERENCES chats (id) ON DELETE CASCADE,
     FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE,
 

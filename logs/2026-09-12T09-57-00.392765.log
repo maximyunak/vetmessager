@@ -1,0 +1,7 @@
+2026-09-12T12:57:00.393112	DEBUG	qzlt/main.go:27	starting application
+2026-09-12T12:57:00.393932	WARN	server/server.go:50	starting http server on 	{"addr": ":5050"}
+2026-09-12T12:57:05.173924	DEBUG	middleware/common.go:79	>>> incoming http request	{"request_id": "11b50bb6-410b-46ad-b4dc-d872da208ef1", "url": "/api/v1/users", "method": "POST", "time": "2026-09-12T09:57:05.173923"}
+2026-09-12T12:57:05.173988	DEBUG	http/create_user.go:31	invoke create user handler	{"request_id": "11b50bb6-410b-46ad-b4dc-d872da208ef1", "url": "/api/v1/users", "method": "POST"}
+2026-09-12T12:57:05.174112	DEBUG	middleware/common.go:86	<<< done HTTP request	{"request_id": "11b50bb6-410b-46ad-b4dc-d872da208ef1", "url": "/api/v1/users", "method": "POST", "status_code": 201, "latency": "188.583µs"}
+2026-09-12T12:57:14.598497	WARN	server/server.go:65	shutting down http server
+2026-09-12T12:57:14.599131	WARN	server/server.go:76	http server shutdown completed

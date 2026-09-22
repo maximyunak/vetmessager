@@ -12,7 +12,7 @@ env-down:
 env-cleanup:
 	@read -p "Remove all volume data? [y/N]?: " ans; \
 	if [ "$$ans" = "y" ]; then \
-	  docker compose down db && \
+	  docker compose down db port-forwarder && \
 	  rm -rf out/pgdata && \
 	  echo "Volume data removed"; \
 	else \
@@ -55,3 +55,22 @@ migrate-action:
 connect-db:
 	@docker compose exec db \
 	 psql -U ${POSTGRES_USER} -d ${POSTGRES_DB}
+
+app-run:
+	@export POSTGRES_HOST=localhost && \
+	go mod tidy && \
+	go run cmd/vetmessager/main.go
+
+swagger-gen:
+	@docker compose run --rm swagger \
+		init \
+		-g cmd/vetmessager/main.go \
+		-o docs \
+		--parseInternal \
+		--parseDependency
+
+app-deploy:
+	@docker compose up -d --build vetmessager
+
+make ps:
+	@docker compose ps

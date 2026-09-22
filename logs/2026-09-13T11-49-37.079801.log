@@ -1,0 +1,21 @@
+2026-09-13T14:49:37.079905	DEBUG	qzlt/main.go:32	Initializing postgtes connection pool
+2026-09-13T14:49:37.101607	DEBUG	qzlt/main.go:39	initializing feature	{"feature": "users"}
+2026-09-13T14:49:37.102784	WARN	server/server.go:50	starting http server on 	{"addr": ":5050"}
+2026-09-13T14:49:42.311819	DEBUG	middleware/common.go:79	>>> incoming http request	{"request_id": "7af18136-0b35-4700-9d09-0c925d13bc55", "url": "/api/v1/users", "method": "POST", "time": "2026-09-13T11:49:42.311817"}
+2026-09-13T14:49:42.311921	DEBUG	http/create_user.go:33	invoke create user handler	{"request_id": "7af18136-0b35-4700-9d09-0c925d13bc55", "url": "/api/v1/users", "method": "POST"}
+2026-09-13T14:49:42.314730	ERROR	response/handler.go:55	Failed to decode and validate CreateUser request	{"request_id": "7af18136-0b35-4700-9d09-0c925d13bc55", "url": "/api/v1/users", "method": "POST", "error": "validate json: Key: 'CreateUserRequest.Password' Error:Field validation for 'Password' failed on the 'required' tag"}
+2026-09-13T14:49:42.314904	DEBUG	middleware/common.go:86	<<< done HTTP request	{"request_id": "7af18136-0b35-4700-9d09-0c925d13bc55", "url": "/api/v1/users", "method": "POST", "status_code": 500, "latency": "3.085792ms"}
+2026-09-13T14:49:49.416393	DEBUG	middleware/common.go:79	>>> incoming http request	{"request_id": "a2cb0e6d-70d6-4335-8c19-a788b1ee1b12", "url": "/api/v1/users", "method": "POST", "time": "2026-09-13T11:49:49.416392"}
+2026-09-13T14:49:49.416471	DEBUG	http/create_user.go:33	invoke create user handler	{"request_id": "a2cb0e6d-70d6-4335-8c19-a788b1ee1b12", "url": "/api/v1/users", "method": "POST"}
+2026-09-13T14:49:49.416533	ERROR	response/handler.go:55	Failed to decode and validate CreateUser request	{"request_id": "a2cb0e6d-70d6-4335-8c19-a788b1ee1b12", "url": "/api/v1/users", "method": "POST", "error": "validate json: Key: 'CreateUserRequest.Password' Error:Field validation for 'Password' failed on the 'required' tag"}
+2026-09-13T14:49:49.416567	DEBUG	middleware/common.go:86	<<< done HTTP request	{"request_id": "a2cb0e6d-70d6-4335-8c19-a788b1ee1b12", "url": "/api/v1/users", "method": "POST", "status_code": 500, "latency": "174.708µs"}
+2026-09-13T14:49:57.657517	DEBUG	middleware/common.go:79	>>> incoming http request	{"request_id": "af4b7512-b6a4-4090-a0b6-47cbc99f6a6c", "url": "/api/v1/users", "method": "POST", "time": "2026-09-13T11:49:57.657516"}
+2026-09-13T14:49:57.657593	DEBUG	http/create_user.go:33	invoke create user handler	{"request_id": "af4b7512-b6a4-4090-a0b6-47cbc99f6a6c", "url": "/api/v1/users", "method": "POST"}
+2026-09-13T14:49:57.657687	ERROR	response/handler.go:55	Failed to create user	{"request_id": "af4b7512-b6a4-4090-a0b6-47cbc99f6a6c", "url": "/api/v1/users", "method": "POST", "error": "invalid `email` format: 13212131"}
+2026-09-13T14:49:57.657723	DEBUG	middleware/common.go:86	<<< done HTTP request	{"request_id": "af4b7512-b6a4-4090-a0b6-47cbc99f6a6c", "url": "/api/v1/users", "method": "POST", "status_code": 500, "latency": "207.167µs"}
+2026-09-13T14:52:24.091862	DEBUG	middleware/common.go:79	>>> incoming http request	{"request_id": "0b6c43fd-837a-4cb6-ae45-dec205269333", "url": "/api/v1/users", "method": "POST", "time": "2026-09-13T11:52:24.091849"}
+2026-09-13T14:52:24.091926	DEBUG	http/create_user.go:33	invoke create user handler	{"request_id": "0b6c43fd-837a-4cb6-ae45-dec205269333", "url": "/api/v1/users", "method": "POST"}
+2026-09-13T14:52:24.092025	ERROR	response/handler.go:55	Failed to create user	{"request_id": "0b6c43fd-837a-4cb6-ae45-dec205269333", "url": "/api/v1/users", "method": "POST", "error": "invalid `email` format: 13212131"}
+2026-09-13T14:52:24.092066	DEBUG	middleware/common.go:86	<<< done HTTP request	{"request_id": "0b6c43fd-837a-4cb6-ae45-dec205269333", "url": "/api/v1/users", "method": "POST", "status_code": 500, "latency": "215.666µs"}
+2026-09-13T14:52:27.797526	WARN	server/server.go:65	shutting down http server
+2026-09-13T14:52:27.798735	WARN	server/server.go:76	http server shutdown completed
