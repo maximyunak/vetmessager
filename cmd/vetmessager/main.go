@@ -47,6 +47,7 @@ func main() {
 
 	// jwt
 	tokenManager := auth.NewJWTManager(auth.NewConfigMust())
+	checkAuth := core_http_middleware.CheckAuth(tokenManager)
 
 	// user feature
 	logger.Debug("initializing feature", zap.String("feature", "users"))
@@ -55,10 +56,12 @@ func main() {
 	usersService := users_service.NewUsersService(usersRepository, passwordHasher, tokenManager)
 
 	usersTransportHTTP := users_transport_http.NewUsersHTTPHandler(usersService)
-	userRoutes := usersTransportHTTP.Routes()
+	userPublicRoutes := usersTransportHTTP.PublicRoutes()
+	userProtectedRoutes := usersTransportHTTP.ProtectedRoutes()
 
 	apiVersionRouter := core_http_server.NewAPIVersionRouter(core_http_server.ApiVersion1)
-	apiVersionRouter.RegisterRoutes(userRoutes...)
+	apiVersionRouter.RegisterRoutes(userPublicRoutes...)
+	apiVersionRouter.RegisterProtectedRoutes(checkAuth, userProtectedRoutes...)
 
 	httpServer := core_http_server.NewHTTPServer(
 		core_http_server.NewConfigMust(),

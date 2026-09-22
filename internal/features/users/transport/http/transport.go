@@ -23,6 +23,7 @@ type UsersService interface {
 	GetUsers(
 		ctx context.Context, limit *int, offset *int,
 	) ([]domain.User, error)
+	Me(ctx context.Context) (domain.User, error)
 }
 
 func NewUsersHTTPHandler(usersService UsersService) *UsersHTTPHandler {
@@ -31,7 +32,7 @@ func NewUsersHTTPHandler(usersService UsersService) *UsersHTTPHandler {
 	}
 }
 
-func (h *UsersHTTPHandler) Routes() []core_http_server.Route {
+func (h *UsersHTTPHandler) PublicRoutes() []core_http_server.Route {
 	return []core_http_server.Route{
 		{
 			Method:  http.MethodPost,
@@ -47,6 +48,16 @@ func (h *UsersHTTPHandler) Routes() []core_http_server.Route {
 			Method:  http.MethodGet,
 			Path:    "/users",
 			Handler: h.GetUsers,
+		},
+	}
+}
+
+func (h *UsersHTTPHandler) ProtectedRoutes() []core_http_server.Route {
+	return []core_http_server.Route{
+		{
+			Method:  http.MethodGet,
+			Path:    "/me",
+			Handler: h.Me,
 		},
 	}
 }
