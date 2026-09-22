@@ -1,9 +1,0 @@
-2026-09-13T17:28:32.485676	DEBUG	qzlt/main.go:32	Initializing postgtes connection pool
-2026-09-13T17:28:32.499694	DEBUG	qzlt/main.go:39	initializing feature	{"feature": "users"}
-2026-09-13T17:28:32.499886	WARN	server/server.go:50	starting http server on 	{"addr": ":5050"}
-2026-09-13T17:28:37.888652	DEBUG	middleware/common.go:79	>>> incoming http request	{"request_id": "4a215e5c-554a-4712-a481-cf9137874097", "url": "/api/v1/users", "method": "POST", "time": "2026-09-13T14:28:37.888651"}
-2026-09-13T17:28:37.888688	DEBUG	http/create_user.go:33	invoke create user handler	{"request_id": "4a215e5c-554a-4712-a481-cf9137874097", "url": "/api/v1/users", "method": "POST"}
-2026-09-13T17:28:37.938433	ERROR	response/handler.go:55	Failed to create user	{"request_id": "4a215e5c-554a-4712-a481-cf9137874097", "url": "/api/v1/users", "method": "POST", "error": "create user: scan error: ERROR: duplicate key value violates unique constraint \"users_email_key\" (SQLSTATE 23505)"}
-2026-09-13T17:28:37.938537	DEBUG	middleware/common.go:86	<<< done HTTP request	{"request_id": "4a215e5c-554a-4712-a481-cf9137874097", "url": "/api/v1/users", "method": "POST", "status_code": 500, "latency": "49.885208ms"}
-2026-09-13T17:28:41.069450	WARN	server/server.go:65	shutting down http server
-2026-09-13T17:28:41.069996	WARN	server/server.go:76	http server shutdown completed

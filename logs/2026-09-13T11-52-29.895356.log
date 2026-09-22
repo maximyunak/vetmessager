@@ -1,9 +1,0 @@
-2026-09-13T14:52:29.895704	DEBUG	qzlt/main.go:32	Initializing postgtes connection pool
-2026-09-13T14:52:29.914649	DEBUG	qzlt/main.go:39	initializing feature	{"feature": "users"}
-2026-09-13T14:52:29.915019	WARN	server/server.go:50	starting http server on 	{"addr": ":5050"}
-2026-09-13T14:52:31.971504	DEBUG	middleware/common.go:79	>>> incoming http request	{"request_id": "596237fe-483d-4904-92e7-bc3fec9627c9", "url": "/api/v1/users", "method": "POST", "time": "2026-09-13T11:52:31.971503"}
-2026-09-13T14:52:31.971540	DEBUG	http/create_user.go:33	invoke create user handler	{"request_id": "596237fe-483d-4904-92e7-bc3fec9627c9", "url": "/api/v1/users", "method": "POST"}
-2026-09-13T14:52:32.019007	ERROR	response/handler.go:55	Failed to create user	{"request_id": "596237fe-483d-4904-92e7-bc3fec9627c9", "url": "/api/v1/users", "method": "POST", "error": "create user: scan error: ERROR: syntax error at or near \"RETURNING\" (SQLSTATE 42601)"}
-2026-09-13T14:52:32.019148	DEBUG	middleware/common.go:86	<<< done HTTP request	{"request_id": "596237fe-483d-4904-92e7-bc3fec9627c9", "url": "/api/v1/users", "method": "POST", "status_code": 500, "latency": "47.644458ms"}
-2026-09-13T14:53:55.426169	WARN	server/server.go:65	shutting down http server
-2026-09-13T14:53:55.426918	WARN	server/server.go:76	http server shutdown completed

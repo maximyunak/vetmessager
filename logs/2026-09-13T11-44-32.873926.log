@@ -1,2 +1,0 @@
-2026-09-13T14:44:32.873987	DEBUG	qzlt/main.go:32	Initializing postgtes connection pool
-2026-09-13T14:44:32.874982	FATAL	qzlt/main.go:35	Failed to connect to postgres	{"error": "parse pgxconfig: cannot parse `postgres://test-user:xxxxx@localhost:5432/quizlet/%!s(MISSING)?sslmode=disable`: failed to parse as URL (invalid percent-encoded token: \"quizlet/%!s(MISSING)\")"}

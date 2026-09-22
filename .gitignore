@@ -1,5 +1,20 @@
 .env
-/out
-/logs
+.DS_Store
 
+# build
+/out
+
+# logs
+/logs/
+logs
+*.log
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
 .idea
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
