@@ -16,6 +16,18 @@ type LoginResponse struct {
 	AccessToken string `json:"access_token"`
 }
 
+// Login godoc
+// @summary Login user
+// @description Authenticate user and return an access token
+// @tags users
+// @accept json
+// @produce json
+// @param request body LoginRequest true "Login credentials"
+// @success 200 {object} LoginResponse "Success"
+// @failure 400 {object} core_http_response.ErrorResponse "Bad request"
+// @failure 401 {object} core_http_response.ErrorResponse "Unauthorized"
+// @failure 500 {object} core_http_response.ErrorResponse "Internal server error"
+// @router /login [post]
 func (h *UsersHTTPHandler) Login(w http.ResponseWriter, r *http.Request) {
 	ctx := r.Context()
 	log := core_logger.FromContext(ctx)

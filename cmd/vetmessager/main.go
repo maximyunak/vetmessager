@@ -25,6 +25,10 @@ import (
 // @description    	Sveta the best
 // @host      localhost:5050
 // @BasePath  /api/v1
+// @securityDefinitions.apikey BearerAuth
+// @in header
+// @name Authorization
+// @description Enter your JWT token with the Bearer prefix. Example: Bearer {token}
 func main() {
 	ctx, cancel := signal.NotifyContext(context.Background(),
 		syscall.SIGINT, syscall.SIGTERM)
