@@ -4,6 +4,7 @@ import (
 	"context"
 	"net/http"
 
+	"github.com/maximyunak/vetmessager/internal/core/domain"
 	core_http_server "github.com/maximyunak/vetmessager/internal/core/transport/http/server"
 )
 
@@ -13,8 +14,8 @@ type MessagesHTTPHandler struct {
 
 type MessagesService interface {
 	CreateMessage(
-		ctx context.Context,
-	)
+		ctx context.Context, messageDomain domain.Message,
+	) (domain.Message, error)
 }
 
 func NewMessagesHTTPHandler(messagesService MessagesService) *MessagesHTTPHandler {
@@ -31,7 +32,7 @@ func (h *MessagesHTTPHandler) ProtectedRoutes() []core_http_server.Route {
 	return []core_http_server.Route{
 		{
 			Method:  http.MethodPost,
-			Path:    "chat/:id",
+			Path:    "/chat/{chatId}",
 			Handler: h.CreateMessage,
 		},
 	}

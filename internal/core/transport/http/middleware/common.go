@@ -14,6 +14,10 @@ import (
 	"go.uber.org/zap"
 )
 
+type contextKey string
+
+const userIDKey contextKey = "user_id"
+
 const requestIDHeader = "X-Request-Id"
 
 func CORS() Middleware {
@@ -81,11 +85,20 @@ func CheckAuth(jwtManager *auth.JWTManager) Middleware {
 				return
 			}
 
-			ctx = context.WithValue(r.Context(), "uid", token.UserID)
+			ctx = WithUserID(r.Context(), token.UserID)
 
 			next.ServeHTTP(rw, r.WithContext(ctx))
 		})
 	}
+}
+
+func WithUserID(ctx context.Context, userID int) context.Context {
+	return context.WithValue(ctx, userIDKey, userID)
+}
+
+func UserIDFromContext(ctx context.Context) (int, bool) {
+	userID, ok := ctx.Value(userIDKey).(int)
+	return userID, ok
 }
 
 func Logger(log *core_logger.Logger) Middleware {
