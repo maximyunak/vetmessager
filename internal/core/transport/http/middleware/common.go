@@ -3,7 +3,6 @@ package core_http_middleware
 import (
 	"context"
 	"net/http"
-	"strings"
 	"time"
 
 	"github.com/google/uuid"
@@ -69,19 +68,21 @@ func CheckAuth(jwtManager *auth.JWTManager) Middleware {
 			rw := core_http_response.NewResponseWriter(w)
 			responseHandler := core_http_response.NewHTTPResponseHandler(log, w)
 
-			authHeader := r.Header.Get("Authorization")
-			if authHeader == "" {
-				responseHandler.ErrorResponse(core_errors.ErrUnauthorized, "Authorization header is missing")
-				return
-			}
-			tokenString := strings.TrimPrefix(authHeader, "Bearer ")
-			if tokenString == "" {
-				responseHandler.ErrorResponse(core_errors.ErrUnauthorized, "Invalid authorization header")
-				return
-			}
-			token, err := jwtManager.ParseToken(tokenString)
+			cookie, err := r.Cookie("access_token")
 			if err != nil {
-				responseHandler.ErrorResponse(core_errors.ErrUnauthorized, "Unauthorized")
+				responseHandler.ErrorResponse(
+					core_errors.ErrUnauthorized,
+					"Access token cookie is missing",
+				)
+				return
+			}
+
+			token, err := jwtManager.ParseToken(cookie.Value)
+			if err != nil {
+				responseHandler.ErrorResponse(
+					core_errors.ErrUnauthorized,
+					"Unauthorized",
+				)
 				return
 			}
 

@@ -13,7 +13,7 @@ type LoginRequest struct {
 	Password string `json:"password" validate:"required,min=5,max=100"`
 }
 type LoginResponse struct {
-	AccessToken string `json:"access_token"`
+	Message string `json:"message"`
 }
 
 // Login godoc
@@ -48,6 +48,14 @@ func (h *UsersHTTPHandler) Login(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	response := LoginResponse{accessToken}
+	response := LoginResponse{Message: "Success"}
+	http.SetCookie(w, &http.Cookie{
+		Name:     "access_token",
+		Value:    accessToken,
+		Path:     "/",
+		HttpOnly: true,
+		Secure:   false,
+		SameSite: http.SameSiteLaxMode,
+	})
 	responseHandler.JSONResponse(response, http.StatusOK)
 }
