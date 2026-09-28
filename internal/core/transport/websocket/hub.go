@@ -1,4 +1,4 @@
-package realtime_websocket
+package core_websocket
 
 type Hub struct {
 	Clients    map[*Client]struct{}

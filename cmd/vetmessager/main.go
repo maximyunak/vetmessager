@@ -12,6 +12,7 @@ import (
 	core_postgres_pool "github.com/maximyunak/vetmessager/internal/core/repository/postgres/pull"
 	core_http_middleware "github.com/maximyunak/vetmessager/internal/core/transport/http/middleware"
 	core_http_server "github.com/maximyunak/vetmessager/internal/core/transport/http/server"
+	core_websocket "github.com/maximyunak/vetmessager/internal/core/transport/websocket"
 	chat_postgres_repository "github.com/maximyunak/vetmessager/internal/features/chat/repository/postgres"
 	messages_postgres_repository "github.com/maximyunak/vetmessager/internal/features/messages/repository/postgres"
 	messages_service "github.com/maximyunak/vetmessager/internal/features/messages/service"
@@ -19,7 +20,6 @@ import (
 	users_postgres_repository "github.com/maximyunak/vetmessager/internal/features/users/repository/postgres"
 	users_service "github.com/maximyunak/vetmessager/internal/features/users/service"
 	users_transport_http "github.com/maximyunak/vetmessager/internal/features/users/transport/http"
-	"github.com/maximyunak/vetmessager/internal/realtime/websocket"
 	"go.uber.org/zap"
 
 	_ "github.com/maximyunak/vetmessager/docs"
@@ -78,8 +78,8 @@ func main() {
 
 	// websocket conn
 
-	hub := realtime_websocket.NewHub()
-	wsHandler := realtime_websocket.NewHandler(hub, chatRepository)
+	hub := core_websocket.NewHub()
+	wsHandler := core_websocket.NewHandler(hub, chatRepository)
 	go hub.Run()
 
 	messageWsProtectedRoutes := wsHandler.ProtectedRoutes()

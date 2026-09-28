@@ -5,7 +5,7 @@ import (
 	"fmt"
 
 	"github.com/maximyunak/vetmessager/internal/core/domain"
-	"github.com/maximyunak/vetmessager/internal/realtime/websocket"
+	core_websocket "github.com/maximyunak/vetmessager/internal/core/transport/websocket"
 )
 
 func (s *MessageService) CreateMessage(ctx context.Context, message domain.Message) (domain.Message, error) {
@@ -19,12 +19,12 @@ func (s *MessageService) CreateMessage(ctx context.Context, message domain.Messa
 	}
 
 	// send to ws
-	event := &realtime_websocket.Event{
+	event := &core_websocket.Event{
 		Type: "message.created",
-		Payload: realtime_websocket.Payload{
+		Payload: core_websocket.Payload{
 			ChatID: message.ChatID,
 			UserID: message.SenderID,
-			Message: &realtime_websocket.Message{
+			Message: &core_websocket.Message{
 				ID:      message.ID,
 				Content: message.Content,
 			},
