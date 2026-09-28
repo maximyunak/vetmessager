@@ -1,12 +1,26 @@
 package core_http_response
 
-import "net/http"
+import (
+	"bufio"
+	"fmt"
+	"net"
+	"net/http"
+)
 
 const StatusCodeUninitialized = -1
 
 type ResponseWriter struct {
 	http.ResponseWriter
 	statusCode int
+}
+
+func (w *ResponseWriter) Hijack() (net.Conn, *bufio.ReadWriter, error) {
+	hijacker, ok := w.ResponseWriter.(http.Hijacker)
+	if !ok {
+		return nil, nil, fmt.Errorf("underlying ResponseWriter does not implement http.Hijacker")
+	}
+
+	return hijacker.Hijack()
 }
 
 func NewResponseWriter(w http.ResponseWriter) *ResponseWriter {
