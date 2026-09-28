@@ -26,8 +26,8 @@ type Payload struct {
 }
 
 type Message struct {
-	ID      int    `json:"id"`
-	Content string `json:"content"`
+	ID      int     `json:"id"`
+	Content *string `json:"content"`
 }
 
 func (c *Client) WriteMessage() {
