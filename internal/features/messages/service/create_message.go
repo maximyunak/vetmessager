@@ -19,12 +19,12 @@ func (s *MessageService) CreateMessage(ctx context.Context, message domain.Messa
 	}
 
 	// send to ws
-	event := &websocket.Event{
+	event := &realtime_websocket.Event{
 		Type: "message.created",
-		Payload: websocket.Payload{
+		Payload: realtime_websocket.Payload{
 			ChatID: message.ChatID,
 			UserID: message.SenderID,
-			Message: &websocket.Message{
+			Message: &realtime_websocket.Message{
 				ID:      message.ID,
 				Content: message.Content,
 			},

@@ -78,8 +78,8 @@ func main() {
 
 	// websocket conn
 
-	hub := websocket.NewHub()
-	wsHandler := websocket.NewHandler(hub, chatRepository)
+	hub := realtime_websocket.NewHub()
+	wsHandler := realtime_websocket.NewHandler(hub, chatRepository)
 	go hub.Run()
 
 	messageWsProtectedRoutes := wsHandler.ProtectedRoutes()

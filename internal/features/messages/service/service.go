@@ -11,13 +11,13 @@ import (
 type MessageService struct {
 	MessageRepository MessageRepository
 	TokenManager      auth.TokenManager
-	hub               *websocket.Hub
+	hub               *realtime_websocket.Hub
 }
 
 type MessageRepository interface {
 	CreateMessage(ctx context.Context, message domain.Message) (domain.Message, error)
 }
 
-func NewMessageService(messageRepository MessageRepository, tokenManager auth.TokenManager, hub *websocket.Hub) *MessageService {
+func NewMessageService(messageRepository MessageRepository, tokenManager auth.TokenManager, hub *realtime_websocket.Hub) *MessageService {
 	return &MessageService{MessageRepository: messageRepository, TokenManager: tokenManager, hub: hub}
 }

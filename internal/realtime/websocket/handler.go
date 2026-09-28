@@ -1,4 +1,4 @@
-package websocket
+package realtime_websocket
 
 import (
 	"context"
