@@ -5,6 +5,7 @@ import (
 	"fmt"
 
 	"github.com/maximyunak/vetmessager/internal/core/domain"
+	core_errors "github.com/maximyunak/vetmessager/internal/core/errors"
 )
 
 func (r *MessageRepository) CreateMessage(
@@ -59,7 +60,7 @@ func (r *MessageRepository) CreateMessage(
 		&messageModel.DeletedAt,
 	)
 	if err != nil {
-		return domain.Message{}, fmt.Errorf("scan error: %w", err)
+		return domain.Message{}, fmt.Errorf("insert message: %v: %w", err, core_errors.ErrNotFound)
 	}
 
 	messageDomain = messageDomainFromModel(messageModel)
