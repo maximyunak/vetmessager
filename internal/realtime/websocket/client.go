@@ -1,4 +1,4 @@
-package messages_transport_websocket
+package websocket
 
 import (
 	"encoding/json"
@@ -66,14 +66,10 @@ func (c *Client) ReadMessage(hub *Hub) {
 			continue
 		}
 		event.Payload.UserID = c.ID
-		log.Printf("event type: %s", event.Type)
-		log.Printf("chat id: %d", event.Payload.ChatID)
-		log.Printf("userId: %d", event.Payload.UserID)
-
-		if event.Payload.Message != nil {
-			log.Printf("message: %s", event.Payload.Message.Content)
+		if _, ok := c.Chats[event.Payload.ChatID]; !ok {
+			continue
 		}
 
-		hub.broadcast <- &event
+		hub.BroadcastToChat(event.Payload.ChatID, &event)
 	}
 }

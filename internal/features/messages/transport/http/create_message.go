@@ -4,10 +4,10 @@ import (
 	"net/http"
 	"strconv"
 
+	"github.com/maximyunak/vetmessager/internal/core/auth"
 	"github.com/maximyunak/vetmessager/internal/core/domain"
 	core_errors "github.com/maximyunak/vetmessager/internal/core/errors"
 	core_logger "github.com/maximyunak/vetmessager/internal/core/logger"
-	core_http_middleware "github.com/maximyunak/vetmessager/internal/core/transport/http/middleware"
 	core_http_request "github.com/maximyunak/vetmessager/internal/core/transport/http/request"
 	core_http_response "github.com/maximyunak/vetmessager/internal/core/transport/http/response"
 )
@@ -24,7 +24,7 @@ func (h *MessagesHTTPHandler) CreateMessage(w http.ResponseWriter, r *http.Reque
 
 	log.Debug("invoke create message handler")
 
-	userID, ok := core_http_middleware.UserIDFromContext(ctx)
+	userID, ok := auth.UserIDFromContext(ctx)
 	if !ok {
 		responseHandler.ErrorResponse(core_errors.ErrUnauthorized, "Unauthorized")
 		return

@@ -12,12 +12,14 @@ import (
 	core_postgres_pool "github.com/maximyunak/vetmessager/internal/core/repository/postgres/pull"
 	core_http_middleware "github.com/maximyunak/vetmessager/internal/core/transport/http/middleware"
 	core_http_server "github.com/maximyunak/vetmessager/internal/core/transport/http/server"
+	chat_postgres_repository "github.com/maximyunak/vetmessager/internal/features/chat/repository/postgres"
 	messages_postgres_repository "github.com/maximyunak/vetmessager/internal/features/messages/repository/postgres"
 	messages_service "github.com/maximyunak/vetmessager/internal/features/messages/service"
 	messages_transport_http "github.com/maximyunak/vetmessager/internal/features/messages/transport/http"
 	users_postgres_repository "github.com/maximyunak/vetmessager/internal/features/users/repository/postgres"
 	users_service "github.com/maximyunak/vetmessager/internal/features/users/service"
 	users_transport_http "github.com/maximyunak/vetmessager/internal/features/users/transport/http"
+	"github.com/maximyunak/vetmessager/internal/realtime/websocket"
 	"go.uber.org/zap"
 
 	_ "github.com/maximyunak/vetmessager/docs"
@@ -69,6 +71,22 @@ func main() {
 	apiVersionRouter := core_http_server.NewAPIVersionRouter(core_http_server.ApiVersion1)
 	apiVersionRouter.RegisterRoutes(userPublicRoutes...)
 	apiVersionRouter.RegisterProtectedRoutes(checkAuth, userProtectedRoutes...)
+
+	// chat feature
+
+	chatRepository := chat_postgres_repository.NewChatRepository(pool)
+
+	// websocket conn
+
+	hub := websocket.NewHub()
+	wsHandler := websocket.NewHandler(hub, chatRepository)
+	go hub.Run()
+
+	messageWsProtectedRoutes := wsHandler.ProtectedRoutes()
+
+	apiVersionRouter.RegisterProtectedRoutes(
+		checkAuth,
+		messageWsProtectedRoutes...)
 
 	// messages feature
 	logger.Debug("initializing feature", zap.String("feature", "messages"))

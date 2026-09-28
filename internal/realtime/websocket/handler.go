@@ -1,4 +1,4 @@
-package messages_transport_websocket
+package websocket
 
 import (
 	"net/http"
@@ -9,15 +9,18 @@ import (
 	core_logger "github.com/maximyunak/vetmessager/internal/core/logger"
 	core_http_response "github.com/maximyunak/vetmessager/internal/core/transport/http/response"
 	core_http_server "github.com/maximyunak/vetmessager/internal/core/transport/http/server"
+	chat_postgres_repository "github.com/maximyunak/vetmessager/internal/features/chat/repository/postgres"
 )
 
 type MessageWsHandler struct {
-	hub *Hub
+	hub            *Hub
+	chatRepository *chat_postgres_repository.ChatRepository
 }
 
-func NewHandler(h *Hub) *MessageWsHandler {
+func NewHandler(h *Hub, chatRepository *chat_postgres_repository.ChatRepository) *MessageWsHandler {
 	return &MessageWsHandler{
-		hub: h,
+		hub:            h,
+		chatRepository: chatRepository,
 	}
 }
 
@@ -42,17 +45,28 @@ func (h *MessageWsHandler) Connect(w http.ResponseWriter, r *http.Request) {
 		responseHandler.ErrorResponse(core_errors.ErrUnauthorized, "Unauthorized")
 		return
 	}
+	chatIDs, err := h.chatRepository.GetUserChatsIDs(ctx, userID)
+	if err != nil {
+		responseHandler.ErrorResponse(err, "get user chats IDs")
+		return
+	}
 
 	conn, err := upgrader.Upgrade(w, r, nil)
 	if err != nil {
-		responseHandler.ErrorResponse(err, "upgrade error")
 		return
+	}
+
+	chats := make(map[int]struct{})
+
+	for _, chatID := range chatIDs {
+		chats[chatID] = struct{}{}
 	}
 
 	client := &Client{
 		Connection: conn,
 		Message:    make(chan *Event, 10),
 		ID:         userID,
+		Chats:      chats,
 	}
 
 	h.hub.register <- client

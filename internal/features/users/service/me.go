@@ -4,13 +4,13 @@ import (
 	"context"
 	"fmt"
 
+	"github.com/maximyunak/vetmessager/internal/core/auth"
 	"github.com/maximyunak/vetmessager/internal/core/domain"
 	core_errors "github.com/maximyunak/vetmessager/internal/core/errors"
-	core_http_middleware "github.com/maximyunak/vetmessager/internal/core/transport/http/middleware"
 )
 
 func (s *UsersService) Me(ctx context.Context) (domain.User, error) {
-	userId, ok := core_http_middleware.UserIDFromContext(ctx)
+	userId, ok := auth.UserIDFromContext(ctx)
 
 	if !ok {
 		return domain.User{}, fmt.Errorf("token not found")

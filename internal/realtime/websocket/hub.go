@@ -1,4 +1,4 @@
-package messages_transport_websocket
+package websocket
 
 type Hub struct {
 	Clients    map[*Client]struct{}
@@ -31,5 +31,14 @@ func (h *Hub) Run() {
 				client.Message <- message
 			}
 		}
+	}
+}
+
+func (h *Hub) BroadcastToChat(chatID int, event *Event) {
+	for client := range h.Clients {
+		if _, ok := client.Chats[chatID]; !ok {
+			continue
+		}
+		client.Message <- event
 	}
 }
