@@ -92,7 +92,7 @@ func main() {
 	logger.Debug("initializing feature", zap.String("feature", "messages"))
 
 	messagesRepository := messages_postgres_repository.NewMessagesRepository(pool)
-	messagesService := messages_service.NewMessageService(messagesRepository, tokenManager, hub)
+	messagesService := messages_service.NewMessageService(messagesRepository, tokenManager, hub, chatRepository)
 	messagesTransportHTTP := messages_transport_http.NewMessagesHTTPHandler(messagesService)
 
 	messageProtectedRoutes := messagesTransportHTTP.ProtectedRoutes()

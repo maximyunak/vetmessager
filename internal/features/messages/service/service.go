@@ -12,12 +12,17 @@ type MessageService struct {
 	MessageRepository MessageRepository
 	TokenManager      auth.TokenManager
 	hub               *core_websocket.Hub
+	ChatRepository    ChatRepository
+}
+
+type ChatRepository interface {
+	IsUserMember(ctx context.Context, chatID int, userID int) (bool, error)
 }
 
 type MessageRepository interface {
 	CreateMessage(ctx context.Context, message domain.Message) (domain.Message, error)
 }
 
-func NewMessageService(messageRepository MessageRepository, tokenManager auth.TokenManager, hub *core_websocket.Hub) *MessageService {
-	return &MessageService{MessageRepository: messageRepository, TokenManager: tokenManager, hub: hub}
+func NewMessageService(messageRepository MessageRepository, tokenManager auth.TokenManager, hub *core_websocket.Hub, ChatRepository ChatRepository) *MessageService {
+	return &MessageService{MessageRepository: messageRepository, TokenManager: tokenManager, hub: hub, ChatRepository: ChatRepository}
 }

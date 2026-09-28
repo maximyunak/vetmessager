@@ -5,6 +5,7 @@ import (
 	"fmt"
 
 	"github.com/maximyunak/vetmessager/internal/core/domain"
+	core_errors "github.com/maximyunak/vetmessager/internal/core/errors"
 	core_websocket "github.com/maximyunak/vetmessager/internal/core/transport/websocket"
 )
 
@@ -13,7 +14,20 @@ func (s *MessageService) CreateMessage(ctx context.Context, message domain.Messa
 		return domain.Message{}, err
 	}
 
-	message, err := s.MessageRepository.CreateMessage(ctx, message)
+	// check exists user in chat
+	isMember, err := s.ChatRepository.IsUserMember(ctx, message.ChatID, message.SenderID)
+	if err != nil {
+		return domain.Message{}, fmt.Errorf("check chat membership: %w", err)
+	}
+
+	fmt.Println("isMember", isMember, "message", message)
+
+	if !isMember {
+		return domain.Message{}, fmt.Errorf("isMember: %t :%w", isMember, core_errors.ErrForbidden)
+	}
+
+	// create message
+	message, err = s.MessageRepository.CreateMessage(ctx, message)
 	if err != nil {
 		return domain.Message{}, fmt.Errorf("create message: %w", err)
 	}
