@@ -17,6 +17,21 @@ type CreateMessageRequest struct {
 	Content          *string `json:"content" validate:"max=5000"`
 }
 
+// CreateMessage godoc
+// @summary Create message
+// @description Create a new message in the specified chat
+// @tags messages
+// @accept json
+// @produce json
+// @param chatId path int true "Chat ID"
+// @param request body CreateMessageRequest true "Create message request"
+// @success 201 {object} domain.Message "Message created successfully"
+// @failure 400 {object} core_http_response.ErrorResponse "Invalid request or chat ID"
+// @failure 401 {object} core_http_response.ErrorResponse "Unauthorized"
+// @failure 403 {object} core_http_response.ErrorResponse "Forbidden"
+// @failure 404 {object} core_http_response.ErrorResponse "Chat not found"
+// @failure 500 {object} core_http_response.ErrorResponse "Internal server error"
+// @router /chats/{chatId}/messages [post]
 func (h *MessagesHTTPHandler) CreateMessage(w http.ResponseWriter, r *http.Request) {
 	ctx := r.Context()
 	log := core_logger.FromContext(ctx)

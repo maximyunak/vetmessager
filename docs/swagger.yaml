@@ -1,11 +1,38 @@
 basePath: /api/v1
 definitions:
+  github_com_maximyunak_vetmessager_internal_core_domain.Message:
+    properties:
+      chat_id:
+        type: integer
+      content:
+        type: string
+      created_at:
+        type: string
+      deleted_at:
+        type: string
+      id:
+        type: integer
+      reply_to_message_id:
+        type: integer
+      sender_id:
+        type: integer
+      updated_at:
+        type: string
+    type: object
   github_com_maximyunak_vetmessager_internal_core_transport_http_response.ErrorResponse:
     properties:
       error:
         type: string
       message:
         type: string
+    type: object
+  internal_features_messages_transport_http.CreateMessageRequest:
+    properties:
+      content:
+        maxLength: 5000
+        type: string
+      reply_to_message_id:
+        type: integer
     type: object
   internal_features_users_transport_http.CreateUserRequest:
     properties:
@@ -69,7 +96,7 @@ definitions:
     type: object
   internal_features_users_transport_http.LoginResponse:
     properties:
-      access_token:
+      message:
         type: string
     type: object
   internal_features_users_transport_http.UserDTOResponse:
@@ -96,6 +123,53 @@ info:
   title: VetMessager
   version: "1.0"
 paths:
+  /chats/{chatId}/messages:
+    post:
+      consumes:
+      - application/json
+      description: Create a new message in the specified chat
+      parameters:
+      - description: Chat ID
+        in: path
+        name: chatId
+        required: true
+        type: integer
+      - description: Create message request
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/internal_features_messages_transport_http.CreateMessageRequest'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Message created successfully
+          schema:
+            $ref: '#/definitions/github_com_maximyunak_vetmessager_internal_core_domain.Message'
+        "400":
+          description: Invalid request or chat ID
+          schema:
+            $ref: '#/definitions/github_com_maximyunak_vetmessager_internal_core_transport_http_response.ErrorResponse'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/github_com_maximyunak_vetmessager_internal_core_transport_http_response.ErrorResponse'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/github_com_maximyunak_vetmessager_internal_core_transport_http_response.ErrorResponse'
+        "404":
+          description: Chat not found
+          schema:
+            $ref: '#/definitions/github_com_maximyunak_vetmessager_internal_core_transport_http_response.ErrorResponse'
+        "500":
+          description: Internal server error
+          schema:
+            $ref: '#/definitions/github_com_maximyunak_vetmessager_internal_core_transport_http_response.ErrorResponse'
+      summary: Create message
+      tags:
+      - messages
   /login:
     post:
       consumes:
@@ -152,8 +226,6 @@ paths:
           description: Internal server error
           schema:
             $ref: '#/definitions/github_com_maximyunak_vetmessager_internal_core_transport_http_response.ErrorResponse'
-      security:
-      - BearerAuth: []
       summary: Get current user
       tags:
       - users

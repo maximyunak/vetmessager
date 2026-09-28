@@ -12,7 +12,6 @@ import (
 // @description Get the authenticated user's information
 // @tags users
 // @produce json
-// @security BearerAuth
 // @success 200 {object} UserDTOResponse "Success"
 // @failure 401 {object} core_http_response.ErrorResponse "Unauthorized"
 // @failure 404 {object} core_http_response.ErrorResponse "User not found"

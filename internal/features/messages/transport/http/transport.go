@@ -32,7 +32,7 @@ func (h *MessagesHTTPHandler) ProtectedRoutes() []core_http_server.Route {
 	return []core_http_server.Route{
 		{
 			Method:  http.MethodPost,
-			Path:    "/chat/{chatId}",
+			Path:    "/chats/{chatId}/messages",
 			Handler: h.CreateMessage,
 		},
 	}
