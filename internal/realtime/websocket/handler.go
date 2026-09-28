@@ -1,6 +1,7 @@
 package websocket
 
 import (
+	"context"
 	"net/http"
 
 	"github.com/gorilla/websocket"
@@ -14,7 +15,11 @@ import (
 
 type MessageWsHandler struct {
 	hub            *Hub
-	chatRepository *chat_postgres_repository.ChatRepository
+	chatRepository chatRepository
+}
+
+type chatRepository interface {
+	GetUserChatsIDs(ctx context.Context, userID int) ([]int, error)
 }
 
 func NewHandler(h *Hub, chatRepository *chat_postgres_repository.ChatRepository) *MessageWsHandler {
