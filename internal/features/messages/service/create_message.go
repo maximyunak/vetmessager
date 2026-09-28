@@ -15,21 +15,11 @@ func (s *MessageService) CreateMessage(ctx context.Context, message domain.Messa
 
 	message, err := s.MessageRepository.CreateMessage(ctx, message)
 	if err != nil {
-		return domain.Message{}, fmt.Errorf("create user: %w", err)
+		return domain.Message{}, fmt.Errorf("create message: %w", err)
 	}
 
 	// send to ws
-	event := &core_websocket.Event{
-		Type: "message.created",
-		Payload: core_websocket.Payload{
-			ChatID: message.ChatID,
-			UserID: message.SenderID,
-			Message: &core_websocket.Message{
-				ID:      message.ID,
-				Content: message.Content,
-			},
-		},
-	}
+	event := core_websocket.NewMessageEvent("message.created", message)
 
 	s.hub.BroadcastToChat(message.ChatID, event)
 
