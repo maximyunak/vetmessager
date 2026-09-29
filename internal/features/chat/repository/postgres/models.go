@@ -42,3 +42,21 @@ func chatDomainFromModel(chat ChatModel) domain.Chat {
 		UpdatedAt: chat.UpdatedAt,
 	}
 }
+
+type ChatMemberModel struct {
+	ChatID    int       `db:"chat_id"`
+	UserID    int       `db:"user_id"`
+	Role      string    `db:"role"`
+	CreatedAt time.Time `db:"created_at"`
+	UpdatedAt time.Time `db:"updated_at"`
+}
+
+func chatMemberDomainFromModel(model ChatMemberModel) domain.ChatMember {
+	return domain.ChatMember{
+		ChatID:    model.ChatID,
+		UserID:    model.UserID,
+		Role:      model.Role,
+		CreatedAt: model.CreatedAt,
+		UpdatedAt: model.UpdatedAt,
+	}
+}

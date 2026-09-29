@@ -16,11 +16,23 @@ type MessageService struct {
 }
 
 type ChatRepository interface {
-	IsUserMember(ctx context.Context, chatID int, userID int) (bool, error)
+	GetChatMember(
+		ctx context.Context,
+		chatID int,
+		userID int,
+	) (domain.ChatMember, error)
 }
 
 type MessageRepository interface {
 	CreateMessage(ctx context.Context, message domain.Message) (domain.Message, error)
+	GetMessage(
+		ctx context.Context,
+		messageID int,
+	) (domain.Message, error)
+	DeleteMessage(
+		ctx context.Context,
+		messageID int,
+	) error
 }
 
 func NewMessageService(messageRepository MessageRepository, tokenManager auth.TokenManager, hub *core_websocket.Hub, ChatRepository ChatRepository) *MessageService {
