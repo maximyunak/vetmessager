@@ -8,4 +8,5 @@ type ChatMember struct {
 	Role      string    `json:"role" db:"role"`
 	CreatedAt time.Time `json:"created_at" db:"created_at"`
 	UpdatedAt time.Time `json:"updated_at" db:"updated_at"`
+	IsMuted   bool      `json:"is_muted" db:"is_muted"`
 }

@@ -44,11 +44,12 @@ func chatDomainFromModel(chat ChatModel) domain.Chat {
 }
 
 type ChatMemberModel struct {
-	ChatID    int       `db:"chat_id"`
-	UserID    int       `db:"user_id"`
-	Role      string    `db:"role"`
-	CreatedAt time.Time `db:"created_at"`
-	UpdatedAt time.Time `db:"updated_at"`
+	ChatID    int
+	UserID    int
+	Role      string
+	CreatedAt time.Time
+	UpdatedAt time.Time
+	IsMuted   bool
 }
 
 func chatMemberDomainFromModel(model ChatMemberModel) domain.ChatMember {
@@ -58,5 +59,6 @@ func chatMemberDomainFromModel(model ChatMemberModel) domain.ChatMember {
 		Role:      model.Role,
 		CreatedAt: model.CreatedAt,
 		UpdatedAt: model.UpdatedAt,
+		IsMuted:   model.IsMuted,
 	}
 }

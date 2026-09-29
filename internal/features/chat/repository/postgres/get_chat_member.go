@@ -20,7 +20,7 @@ func (r *ChatRepository) GetChatMember(
 	defer cancel()
 
 	query := `
-		SELECT chat_id, user_id, role, created_at, updated_at
+		SELECT chat_id, user_id, role, created_at, updated_at, is_muted
 		FROM chat_members
 		WHERE chat_id = $1 AND user_id = $2
 	`
@@ -38,16 +38,15 @@ func (r *ChatRepository) GetChatMember(
 		&model.Role,
 		&model.CreatedAt,
 		&model.UpdatedAt,
+		&model.IsMuted,
 	)
 
 	if err != nil {
-		if err != nil {
-			if errors.Is(err, pgx.ErrNoRows) {
-				return domain.ChatMember{}, core_errors.ErrNotFound
-			}
-
-			return domain.ChatMember{}, fmt.Errorf("get chat member: %w", err)
+		if errors.Is(err, pgx.ErrNoRows) {
+			return domain.ChatMember{}, core_errors.ErrNotFound
 		}
+
+		return domain.ChatMember{}, fmt.Errorf("get chat member: %w", err)
 	}
 
 	return chatMemberDomainFromModel(model), nil
