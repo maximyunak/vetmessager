@@ -86,6 +86,145 @@ const docTemplate = `{
                 }
             }
         },
+        "/chats/{chatId}/messages/{messageId}": {
+            "delete": {
+                "description": "Delete an existing message from the specified chat",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "messages"
+                ],
+                "summary": "Delete message",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "Chat ID",
+                        "name": "chatId",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "Message ID",
+                        "name": "messageId",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Message deleted successfully"
+                    },
+                    "400": {
+                        "description": "Invalid chat ID or message ID",
+                        "schema": {
+                            "$ref": "#/definitions/github_com_maximyunak_vetmessager_internal_core_transport_http_response.ErrorResponse"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/github_com_maximyunak_vetmessager_internal_core_transport_http_response.ErrorResponse"
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden",
+                        "schema": {
+                            "$ref": "#/definitions/github_com_maximyunak_vetmessager_internal_core_transport_http_response.ErrorResponse"
+                        }
+                    },
+                    "404": {
+                        "description": "Message or chat not found",
+                        "schema": {
+                            "$ref": "#/definitions/github_com_maximyunak_vetmessager_internal_core_transport_http_response.ErrorResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error",
+                        "schema": {
+                            "$ref": "#/definitions/github_com_maximyunak_vetmessager_internal_core_transport_http_response.ErrorResponse"
+                        }
+                    }
+                }
+            },
+            "patch": {
+                "description": "Edit an existing message in the specified chat",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "messages"
+                ],
+                "summary": "Edit message",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "Chat ID",
+                        "name": "chatId",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "Message ID",
+                        "name": "messageId",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "Message update request",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/internal_features_messages_transport_http.PatchMessageRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Message updated successfully",
+                        "schema": {
+                            "$ref": "#/definitions/github_com_maximyunak_vetmessager_internal_core_domain.Message"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid request, chat ID, or message ID",
+                        "schema": {
+                            "$ref": "#/definitions/github_com_maximyunak_vetmessager_internal_core_transport_http_response.ErrorResponse"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/github_com_maximyunak_vetmessager_internal_core_transport_http_response.ErrorResponse"
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden",
+                        "schema": {
+                            "$ref": "#/definitions/github_com_maximyunak_vetmessager_internal_core_transport_http_response.ErrorResponse"
+                        }
+                    },
+                    "404": {
+                        "description": "Message or chat not found",
+                        "schema": {
+                            "$ref": "#/definitions/github_com_maximyunak_vetmessager_internal_core_transport_http_response.ErrorResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error",
+                        "schema": {
+                            "$ref": "#/definitions/github_com_maximyunak_vetmessager_internal_core_transport_http_response.ErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
         "/login": {
             "post": {
                 "description": "Authenticate user and return an access token",
@@ -264,6 +403,28 @@ const docTemplate = `{
                 }
             }
         },
+        "github_com_maximyunak_vetmessager_internal_core_transport_http_types.Nullable-int": {
+            "type": "object",
+            "properties": {
+                "set": {
+                    "type": "boolean"
+                },
+                "value": {
+                    "type": "integer"
+                }
+            }
+        },
+        "github_com_maximyunak_vetmessager_internal_core_transport_http_types.Nullable-string": {
+            "type": "object",
+            "properties": {
+                "set": {
+                    "type": "boolean"
+                },
+                "value": {
+                    "type": "string"
+                }
+            }
+        },
         "internal_features_messages_transport_http.CreateMessageRequest": {
             "type": "object",
             "properties": {
@@ -273,6 +434,17 @@ const docTemplate = `{
                 },
                 "reply_to_message_id": {
                     "type": "integer"
+                }
+            }
+        },
+        "internal_features_messages_transport_http.PatchMessageRequest": {
+            "type": "object",
+            "properties": {
+                "content": {
+                    "$ref": "#/definitions/github_com_maximyunak_vetmessager_internal_core_transport_http_types.Nullable-string"
+                },
+                "reply_to_message_id": {
+                    "$ref": "#/definitions/github_com_maximyunak_vetmessager_internal_core_transport_http_types.Nullable-int"
                 }
             }
         },

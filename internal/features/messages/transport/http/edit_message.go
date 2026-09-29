@@ -1,7 +1,6 @@
 package messages_transport_http
 
 import (
-	"fmt"
 	"net/http"
 	"strconv"
 
@@ -69,8 +68,6 @@ func (h *MessagesHTTPHandler) EditMessage(w http.ResponseWriter, r *http.Request
 		)
 		return
 	}
-
-	fmt.Println(request)
 
 	messagePatch := userPatchFromRequest(
 		request,

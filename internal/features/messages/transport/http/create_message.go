@@ -47,6 +47,7 @@ func (h *MessagesHTTPHandler) CreateMessage(w http.ResponseWriter, r *http.Reque
 	chatID, err := strconv.Atoi(r.PathValue("chatId"))
 	if err != nil {
 		responseHandler.ErrorResponse(core_errors.ErrInvalidArgument, "Invalid chat ID")
+		return
 	}
 
 	var request CreateMessageRequest

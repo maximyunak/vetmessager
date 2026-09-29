@@ -26,6 +26,20 @@ definitions:
       message:
         type: string
     type: object
+  github_com_maximyunak_vetmessager_internal_core_transport_http_types.Nullable-int:
+    properties:
+      set:
+        type: boolean
+      value:
+        type: integer
+    type: object
+  github_com_maximyunak_vetmessager_internal_core_transport_http_types.Nullable-string:
+    properties:
+      set:
+        type: boolean
+      value:
+        type: string
+    type: object
   internal_features_messages_transport_http.CreateMessageRequest:
     properties:
       content:
@@ -33,6 +47,13 @@ definitions:
         type: string
       reply_to_message_id:
         type: integer
+    type: object
+  internal_features_messages_transport_http.PatchMessageRequest:
+    properties:
+      content:
+        $ref: '#/definitions/github_com_maximyunak_vetmessager_internal_core_transport_http_types.Nullable-string'
+      reply_to_message_id:
+        $ref: '#/definitions/github_com_maximyunak_vetmessager_internal_core_transport_http_types.Nullable-int'
     type: object
   internal_features_users_transport_http.CreateUserRequest:
     properties:
@@ -168,6 +189,99 @@ paths:
           schema:
             $ref: '#/definitions/github_com_maximyunak_vetmessager_internal_core_transport_http_response.ErrorResponse'
       summary: Create message
+      tags:
+      - messages
+  /chats/{chatId}/messages/{messageId}:
+    delete:
+      description: Delete an existing message from the specified chat
+      parameters:
+      - description: Chat ID
+        in: path
+        name: chatId
+        required: true
+        type: integer
+      - description: Message ID
+        in: path
+        name: messageId
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "204":
+          description: Message deleted successfully
+        "400":
+          description: Invalid chat ID or message ID
+          schema:
+            $ref: '#/definitions/github_com_maximyunak_vetmessager_internal_core_transport_http_response.ErrorResponse'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/github_com_maximyunak_vetmessager_internal_core_transport_http_response.ErrorResponse'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/github_com_maximyunak_vetmessager_internal_core_transport_http_response.ErrorResponse'
+        "404":
+          description: Message or chat not found
+          schema:
+            $ref: '#/definitions/github_com_maximyunak_vetmessager_internal_core_transport_http_response.ErrorResponse'
+        "500":
+          description: Internal server error
+          schema:
+            $ref: '#/definitions/github_com_maximyunak_vetmessager_internal_core_transport_http_response.ErrorResponse'
+      summary: Delete message
+      tags:
+      - messages
+    patch:
+      consumes:
+      - application/json
+      description: Edit an existing message in the specified chat
+      parameters:
+      - description: Chat ID
+        in: path
+        name: chatId
+        required: true
+        type: integer
+      - description: Message ID
+        in: path
+        name: messageId
+        required: true
+        type: integer
+      - description: Message update request
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/internal_features_messages_transport_http.PatchMessageRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Message updated successfully
+          schema:
+            $ref: '#/definitions/github_com_maximyunak_vetmessager_internal_core_domain.Message'
+        "400":
+          description: Invalid request, chat ID, or message ID
+          schema:
+            $ref: '#/definitions/github_com_maximyunak_vetmessager_internal_core_transport_http_response.ErrorResponse'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/github_com_maximyunak_vetmessager_internal_core_transport_http_response.ErrorResponse'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/github_com_maximyunak_vetmessager_internal_core_transport_http_response.ErrorResponse'
+        "404":
+          description: Message or chat not found
+          schema:
+            $ref: '#/definitions/github_com_maximyunak_vetmessager_internal_core_transport_http_response.ErrorResponse'
+        "500":
+          description: Internal server error
+          schema:
+            $ref: '#/definitions/github_com_maximyunak_vetmessager_internal_core_transport_http_response.ErrorResponse'
+      summary: Edit message
       tags:
       - messages
   /login:

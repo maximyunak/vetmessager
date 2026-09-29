@@ -10,12 +10,26 @@ import (
 	core_http_response "github.com/maximyunak/vetmessager/internal/core/transport/http/response"
 )
 
+// DeleteMessage godoc
+// @summary Delete message
+// @description Delete an existing message from the specified chat
+// @tags messages
+// @produce json
+// @param chatId path int true "Chat ID"
+// @param messageId path int true "Message ID"
+// @success 204 "Message deleted successfully"
+// @failure 400 {object} core_http_response.ErrorResponse "Invalid chat ID or message ID"
+// @failure 401 {object} core_http_response.ErrorResponse "Unauthorized"
+// @failure 403 {object} core_http_response.ErrorResponse "Forbidden"
+// @failure 404 {object} core_http_response.ErrorResponse "Message or chat not found"
+// @failure 500 {object} core_http_response.ErrorResponse "Internal server error"
+// @router /chats/{chatId}/messages/{messageId} [delete]
 func (h *MessagesHTTPHandler) DeleteMessage(w http.ResponseWriter, r *http.Request) {
 	ctx := r.Context()
 	log := core_logger.FromContext(ctx)
 	responseHandler := core_http_response.NewHTTPResponseHandler(log, w)
 
-	log.Debug("invoke create message handler")
+	log.Debug("invoke delete message handler")
 
 	userID, ok := auth.UserIDFromContext(ctx)
 	if !ok {
