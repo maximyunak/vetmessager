@@ -33,6 +33,10 @@ type MessageRepository interface {
 		ctx context.Context,
 		messageID int,
 	) error
+	EditMessage(
+		ctx context.Context,
+		message domain.Message,
+	) (domain.Message, error)
 }
 
 func NewMessageService(messageRepository MessageRepository, tokenManager auth.TokenManager, hub *core_websocket.Hub, ChatRepository ChatRepository) *MessageService {

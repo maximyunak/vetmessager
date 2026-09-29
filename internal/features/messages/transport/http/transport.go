@@ -17,6 +17,7 @@ type MessagesService interface {
 		ctx context.Context, messageDomain domain.Message,
 	) (domain.Message, error)
 	DeleteMessage(ctx context.Context, userID int, messageID int, chatID int) error
+	EditMessage(ctx context.Context, message domain.MessagePatch) (domain.Message, error)
 }
 
 func NewMessagesHTTPHandler(messagesService MessagesService) *MessagesHTTPHandler {
@@ -40,6 +41,11 @@ func (h *MessagesHTTPHandler) ProtectedRoutes() []core_http_server.Route {
 			Method:  http.MethodDelete,
 			Path:    "/chats/{chatId}/messages/{messageId}",
 			Handler: h.DeleteMessage,
+		},
+		{
+			Method:  http.MethodPatch,
+			Path:    "/chats/{chatId}/messages/{messageId}",
+			Handler: h.EditMessage,
 		},
 	}
 }

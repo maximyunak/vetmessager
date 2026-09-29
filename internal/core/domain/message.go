@@ -30,7 +30,7 @@ func NewMessageUninitialized(chatId int, senderId int, replyId *int, content *st
 	}
 }
 
-func (m Message) Validate() error {
+func (m *Message) Validate() error {
 	if m.ChatID <= 0 {
 		return fmt.Errorf(
 			"invalid `chat_id`: %d: %w",
@@ -55,6 +55,69 @@ func (m Message) Validate() error {
 			core_errors.ErrInvalidArgument,
 		)
 	}
+
+	return nil
+}
+
+type MessagePatch struct {
+	ID               int
+	ChatID           int
+	SenderID         int
+	ReplyToMessageID Nullable[int]
+	Content          Nullable[string]
+}
+
+func (p *MessagePatch) Validate() error {
+
+	if p.ID <= 0 {
+		return fmt.Errorf("invalid `id`: %d: %w", p.ID, core_errors.ErrInvalidArgument)
+	}
+
+	if p.ChatID <= 0 {
+		return fmt.Errorf("invalid `chat_id`: %d: %w", p.ChatID, core_errors.ErrInvalidArgument)
+	}
+
+	if p.SenderID <= 0 {
+		return fmt.Errorf("invalid `sender_id`: %d: %w", p.SenderID, core_errors.ErrInvalidArgument)
+	}
+
+	if !p.Content.Set && !p.ReplyToMessageID.Set {
+		return fmt.Errorf("no fields to update: %w", core_errors.ErrInvalidArgument)
+	}
+
+	if p.Content.Set && p.Content.Value != nil {
+		contentLength := len([]rune(*p.Content.Value))
+		if contentLength < 1 || contentLength > 5000 {
+			return fmt.Errorf(
+				"invalid `content` length: %d: %w",
+				contentLength,
+				core_errors.ErrInvalidArgument,
+			)
+		}
+	}
+
+	return nil
+}
+
+func (m *Message) ApplyPatch(patch MessagePatch) error {
+	if err := patch.Validate(); err != nil {
+		return fmt.Errorf("validate message patch: %w", err)
+	}
+
+	tmp := *m
+
+	if patch.Content.Set {
+		tmp.Content = patch.Content.Value
+	}
+	if patch.ReplyToMessageID.Set {
+		tmp.ReplyToMessageID = patch.ReplyToMessageID.Value
+	}
+
+	if err := tmp.Validate(); err != nil {
+		return fmt.Errorf("validate message patch: %w", err)
+	}
+
+	*m = tmp
 
 	return nil
 }
