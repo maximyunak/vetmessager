@@ -16,6 +16,77 @@ const docTemplate = `{
     "basePath": "{{.BasePath}}",
     "paths": {
         "/chats/{chatId}/messages": {
+            "get": {
+                "description": "Get messages from a chat with pagination",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "messages"
+                ],
+                "summary": "Get chat messages",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "Chat ID",
+                        "name": "chatId",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "default": 20,
+                        "description": "Number of messages to return",
+                        "name": "limit",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "default": 0,
+                        "description": "Number of messages to skip",
+                        "name": "offset",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Messages retrieved successfully",
+                        "schema": {
+                            "$ref": "#/definitions/internal_features_messages_transport_http.GetMessagesResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid chat ID or pagination parameters",
+                        "schema": {
+                            "$ref": "#/definitions/github_com_maximyunak_vetmessager_internal_core_transport_http_response.ErrorResponse"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/github_com_maximyunak_vetmessager_internal_core_transport_http_response.ErrorResponse"
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden",
+                        "schema": {
+                            "$ref": "#/definitions/github_com_maximyunak_vetmessager_internal_core_transport_http_response.ErrorResponse"
+                        }
+                    },
+                    "404": {
+                        "description": "Chat not found",
+                        "schema": {
+                            "$ref": "#/definitions/github_com_maximyunak_vetmessager_internal_core_transport_http_response.ErrorResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error",
+                        "schema": {
+                            "$ref": "#/definitions/github_com_maximyunak_vetmessager_internal_core_transport_http_response.ErrorResponse"
+                        }
+                    }
+                }
+            },
             "post": {
                 "description": "Create a new message in the specified chat",
                 "consumes": [
@@ -434,6 +505,55 @@ const docTemplate = `{
                 },
                 "reply_to_message_id": {
                     "type": "integer"
+                }
+            }
+        },
+        "internal_features_messages_transport_http.GetMessagesResponse": {
+            "type": "object",
+            "properties": {
+                "data": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/internal_features_messages_transport_http.MessageDTOResponse"
+                    }
+                },
+                "limit": {
+                    "type": "integer"
+                },
+                "offset": {
+                    "type": "integer"
+                },
+                "total": {
+                    "type": "integer"
+                }
+            }
+        },
+        "internal_features_messages_transport_http.MessageDTOResponse": {
+            "type": "object",
+            "properties": {
+                "chat_id": {
+                    "type": "integer"
+                },
+                "content": {
+                    "type": "string"
+                },
+                "created_at": {
+                    "type": "string"
+                },
+                "deleted_at": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "reply_to_message_id": {
+                    "type": "integer"
+                },
+                "sender_id": {
+                    "type": "integer"
+                },
+                "updated_at": {
+                    "type": "string"
                 }
             }
         },

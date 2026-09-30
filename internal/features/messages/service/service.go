@@ -29,6 +29,8 @@ type MessageRepository interface {
 		ctx context.Context,
 		messageID int,
 	) (domain.Message, error)
+	GetMessages(ctx context.Context, chatID int, limit int, offset int) ([]domain.Message, error)
+	GetMessagesCount(ctx context.Context, chatID int) (int, error)
 	DeleteMessage(
 		ctx context.Context,
 		messageID int,

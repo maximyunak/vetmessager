@@ -48,6 +48,38 @@ definitions:
       reply_to_message_id:
         type: integer
     type: object
+  internal_features_messages_transport_http.GetMessagesResponse:
+    properties:
+      data:
+        items:
+          $ref: '#/definitions/internal_features_messages_transport_http.MessageDTOResponse'
+        type: array
+      limit:
+        type: integer
+      offset:
+        type: integer
+      total:
+        type: integer
+    type: object
+  internal_features_messages_transport_http.MessageDTOResponse:
+    properties:
+      chat_id:
+        type: integer
+      content:
+        type: string
+      created_at:
+        type: string
+      deleted_at:
+        type: string
+      id:
+        type: integer
+      reply_to_message_id:
+        type: integer
+      sender_id:
+        type: integer
+      updated_at:
+        type: string
+    type: object
   internal_features_messages_transport_http.PatchMessageRequest:
     properties:
       content:
@@ -145,6 +177,54 @@ info:
   version: "1.0"
 paths:
   /chats/{chatId}/messages:
+    get:
+      description: Get messages from a chat with pagination
+      parameters:
+      - description: Chat ID
+        in: path
+        name: chatId
+        required: true
+        type: integer
+      - default: 20
+        description: Number of messages to return
+        in: query
+        name: limit
+        type: integer
+      - default: 0
+        description: Number of messages to skip
+        in: query
+        name: offset
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Messages retrieved successfully
+          schema:
+            $ref: '#/definitions/internal_features_messages_transport_http.GetMessagesResponse'
+        "400":
+          description: Invalid chat ID or pagination parameters
+          schema:
+            $ref: '#/definitions/github_com_maximyunak_vetmessager_internal_core_transport_http_response.ErrorResponse'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/github_com_maximyunak_vetmessager_internal_core_transport_http_response.ErrorResponse'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/github_com_maximyunak_vetmessager_internal_core_transport_http_response.ErrorResponse'
+        "404":
+          description: Chat not found
+          schema:
+            $ref: '#/definitions/github_com_maximyunak_vetmessager_internal_core_transport_http_response.ErrorResponse'
+        "500":
+          description: Internal server error
+          schema:
+            $ref: '#/definitions/github_com_maximyunak_vetmessager_internal_core_transport_http_response.ErrorResponse'
+      summary: Get chat messages
+      tags:
+      - messages
     post:
       consumes:
       - application/json

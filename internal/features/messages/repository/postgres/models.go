@@ -29,3 +29,13 @@ func messageDomainFromModel(model MessageModel) domain.Message {
 		DeletedAt:        model.DeletedAt,
 	}
 }
+
+func messageDomainsFromModels(messages []MessageModel) []domain.Message {
+	domains := make([]domain.Message, len(messages))
+
+	for i, m := range messages {
+		domains[i] = messageDomainFromModel(m)
+	}
+
+	return domains
+}
